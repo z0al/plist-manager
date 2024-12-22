@@ -4,7 +4,7 @@
 		"scope": "nix",
 		"description": "Nix Module",
 		"body": [
-			"{ config, pkgs, lib, ... }:",
+			"{ config, lib, ... }:",
 			"",
 			"let",
 			"  cfg = config.defaults.${1:name};",

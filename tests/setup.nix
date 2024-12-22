@@ -26,5 +26,5 @@ let
 in
 
 {
-  sample = makeTest ./sample.nix;
+  dock = makeTest ./dock.nix;
 }

@@ -20,6 +20,8 @@ let
     builtins.elemAt option.loc 0 == "defaults" &&
     builtins.elemAt option.loc 1 == prefix
   );
+
+  dock = makeOptionsDoc darwinSystem (hasPrefix "dock");
 in
 
 pkgs.stdenvNoCC.mkDerivation {
@@ -27,7 +29,9 @@ pkgs.stdenvNoCC.mkDerivation {
   src = ./.;
 
   patchPhase = ''
-
+    # The "declared by" links point to a file which only exists when the docs
+    # are built locally. This removes the links.
+    sed '/*Declared by:*/,/^$/d' <${dock.optionsCommonMark} >>src/options/dock.md
   '';
 
   buildPhase = ''
