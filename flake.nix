@@ -22,6 +22,8 @@
 
     {
       darwinModules.default = import ./targets/darwin.nix;
+      homeManagerModules.default = import ./targets/home-manager.nix;
+
       checks = perSystem (system: tests.${system});
     };
 }
