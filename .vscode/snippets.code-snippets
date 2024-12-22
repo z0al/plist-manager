@@ -1,0 +1,47 @@
+{
+	"Nix Module": {
+		"prefix": "module",
+		"scope": "nix",
+		"description": "Nix Module",
+		"body": [
+			"{ config, pkgs, lib, ... }:",
+			"",
+			"let",
+			"  cfg = config.defaults.${1:name};",
+			"in",
+			"",
+			"{",
+			"  options.defaults.${1:name} = with lib; {",
+			"    enable = mkOption {",
+			"      type = types.bool;",
+			"      default = ${2:false};",
+			"    };",
+			"  };",
+			"",
+			"  config = lib.mkIf cfg.enable {",
+			"    $0",
+			"  };",
+			"}",
+			""
+		]
+	},
+	"Nix Module Test": {
+		"prefix": "test",
+		"body": [
+			"{ config, ... }:",
+			"",
+			"{",
+			"  defaults.$0",
+			"",
+			"  assertions = [",
+			"    {",
+			"      message = \"expects true to equal true\";",
+			"      assertion = true == true;",
+			"    }",
+			"  ];",
+			"}",
+			""
+		],
+		"description": "Nix Module Test"
+	}
+}
