@@ -4,7 +4,7 @@ An abstraction built on top of [nix-darwin](https://github.com/LnL7/nix-darwin) 
 
 ## Documentation
 
-See installation instructions and available options at https://z0al.github.io/darwin-defaults.nix
+See installation instructions and available options at https://z0al.github.io/defaults.nix
 
 ## License
 

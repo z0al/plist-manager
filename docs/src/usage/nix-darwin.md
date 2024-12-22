@@ -6,7 +6,7 @@
 {
 	inputs = {
 		# ... other inputs
-		darwin-defaults.url = "github:z0al/darwin-defaults.nix";
+		darwin-defaults.url = "github:z0al/defaults.nix";
 		darwin-defaults.inputs.nixpkgs.follows = "nixpkgs";
 		darwin-defaults.inputs.nix-darwin.follows = "nix-darwin";
 	};
