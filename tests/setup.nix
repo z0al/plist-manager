@@ -13,7 +13,7 @@ let
         { config, ... }:
         {
           imports = [
-            ../modules
+            ../targets/darwin.nix
             test
           ];
 
