@@ -27,10 +27,19 @@
           tests = import ./tests/setup.nix {
             inherit nixpkgs system nix-darwin;
           };
+
+          docs = import ./docs {
+            inherit nixpkgs system inputs;
+            pkgs = nixpkgs.legacyPackages.${system};
+          };
         in
 
         {
           checks = tests;
+
+          legacyPackages = {
+            inherit docs;
+          };
         };
 
       flake = {
