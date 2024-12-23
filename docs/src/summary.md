@@ -8,3 +8,4 @@
 # Reference
 
 - [Dock](./options/dock.md)
+- [Finder](./options/finder.md)

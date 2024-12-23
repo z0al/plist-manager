@@ -1,29 +1,30 @@
 {
   "Nix Module": {
     "prefix": "module",
-    "scope": "nix",
-    "description": "Nix Module",
     "body": [
-      "{ config, lib, ... }:",
+      "{ config, pkgs, lib, ... }:",
       "",
       "let",
       "  cfg = config.defaults.${1:name};",
+      "",
+      "  inherit (pkgs.callPackage ../lib { }) mkNullableOption;",
       "in",
       "",
       "{",
       "  options.defaults.${1:name} = with lib; {",
-      "    enable = mkOption {",
+      "    ${2:enable} = mkNullableOption {",
       "      type = types.bool;",
-      "      default = ${2:false};",
+      "      description = ''",
+      "        Whether to $3",
+      "      '';",
       "    };",
       "  };",
       "",
-      "  config = lib.mkIf cfg.enable {",
-      "    $0",
-      "  };",
+      "  config.defaults._impl = {};",
       "}",
       ""
-    ]
+    ],
+    "description": "Nix Module"
   },
   "Nix Module Test": {
     "prefix": "test",

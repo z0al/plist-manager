@@ -22,6 +22,7 @@ let
   );
 
   dock = makeOptionsDoc darwinSystem (hasPrefix "dock");
+  finder = makeOptionsDoc darwinSystem (hasPrefix "finder");
 in
 
 pkgs.stdenvNoCC.mkDerivation {
@@ -32,6 +33,7 @@ pkgs.stdenvNoCC.mkDerivation {
     # The "declared by" links point to a file which only exists when the docs
     # are built locally. This removes the links.
     sed '/*Declared by:*/,/^$/d' <${dock.optionsCommonMark} >>src/options/dock.md
+    sed '/*Declared by:*/,/^$/d' <${finder.optionsCommonMark} >>src/options/finder.md
   '';
 
   buildPhase = ''

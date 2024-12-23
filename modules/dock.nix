@@ -3,9 +3,7 @@
 let
   cfg = config.defaults.dock;
 
-  inherit (pkgs.callPackage ../lib { })
-    mkCond
-    mkNullableOption;
+  inherit (pkgs.callPackage ../lib { }) mkCond mkNullableOption;
 in
 
 {
