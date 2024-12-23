@@ -1,8 +1,8 @@
 [book]
-title = "Darwin Defaults"
+title = "Better Darwin Defaults"
 description = "Declarative & human-friendly darwin user defaults"
 
 [output.html]
-site-url = "/defaults.nix/"
-git-repository-url = "https://github.com/z0al/defaults.nix"
-edit-url-template = "https://github.com/z0al/defaults.nix/edit/master/docs/{path}"
+site-url = "/better-defaults.nix/"
+git-repository-url = "https://github.com/z0al/better-defaults.nix"
+edit-url-template = "https://github.com/z0al/better-defaults.nix/edit/master/docs/{path}"
