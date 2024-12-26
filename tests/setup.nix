@@ -1,4 +1,5 @@
-{ nixpkgs
+{ self
+, nixpkgs
 , nix-darwin
 , system
 }:
@@ -13,7 +14,7 @@ let
         { config, ... }:
         {
           imports = [
-            ../targets/darwin.nix
+            self.darwinModules.default
             test
           ];
 
@@ -26,5 +27,8 @@ let
 in
 
 {
+  desktop = makeTest ./desktop.nix;
   dock = makeTest ./dock.nix;
+  finder = makeTest ./finder.nix;
+  safari = makeTest ./safari.nix;
 }

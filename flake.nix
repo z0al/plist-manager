@@ -11,7 +11,8 @@
   };
 
   outputs =
-    { nixpkgs
+    { self
+    , nixpkgs
     , nix-darwin
     , flake-parts
     , ...
@@ -25,7 +26,7 @@
       perSystem = { system, ... }:
         let
           tests = import ./tests/setup.nix {
-            inherit nixpkgs system nix-darwin;
+            inherit self nixpkgs system nix-darwin;
           };
 
           docs = import ./docs {

@@ -1,7 +1,7 @@
 { config, ... }:
 
 let
-  pref = config.system.defaults.CustomUserPreferences;
+  cfg = config.system.defaults.CustomUserPreferences."com.apple.dock";
 in
 
 {
@@ -25,42 +25,42 @@ in
   assertions = [
     {
       message = "expects dock position to equal 'left'";
-      assertion = pref."com.apple.dock".orientation == "left";
+      assertion = cfg.orientation == "left";
     }
 
     {
       message = "expects dock size to equal 24";
-      assertion = pref."com.apple.dock".tilesize == 24;
+      assertion = cfg.tilesize == 24;
     }
 
     {
       message = "expects dock to not show recent apps";
-      assertion = pref."com.apple.dock".show-recents == false;
+      assertion = cfg.show-recents == false;
     }
 
     {
       message = "expects dock auto-hide to be enabled";
-      assertion = pref."com.apple.dock".autohide == true;
+      assertion = cfg.autohide == true;
     }
 
     {
       message = "expects dock auto-hide delay to equal 0.5";
-      assertion = pref."com.apple.dock".autohide-delay == 0.5;
+      assertion = cfg.autohide-delay == 0.5;
     }
 
     {
       message = "expects dock auto-hide time modifier to equal 0.5";
-      assertion = pref."com.apple.dock".autohide-time-modifier == 0.5;
+      assertion = cfg.autohide-time-modifier == 0.5;
     }
 
     {
       message = "expects dock minimize effect to equal 'scale'";
-      assertion = pref."com.apple.dock".mineffect == "scale";
+      assertion = cfg.mineffect == "scale";
     }
 
     {
       message = "expects dock minimize to not minimize to application icon";
-      assertion = pref."com.apple.dock".minimize-to-application-icon == false;
+      assertion = cfg.minimize-to-application-icon == false;
     }
   ];
 }

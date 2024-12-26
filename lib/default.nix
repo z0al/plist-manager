@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib }:
 
 let
   mkNullableOption = args:
@@ -8,7 +8,7 @@ let
     });
 
   mkCond = cond: value:
-    if cond then value else null;
+    if cond == true then value else null;
 in
 
 {

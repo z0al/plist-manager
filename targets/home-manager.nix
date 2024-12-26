@@ -1,11 +1,9 @@
-{ lib, ... }:
+{ config, ... }:
 
 {
   imports = [
     ../modules
-
-    (lib.mkAliasOptionModule
-      [ "defaults" "_impl" ]
-      [ "targets" "darwin" "currentHostDefaults" ])
   ];
+
+  targets.darwin.currentHostDefaults = config.defaults._impl;
 }

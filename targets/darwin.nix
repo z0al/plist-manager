@@ -1,11 +1,9 @@
-{ lib, ... }:
+{ config, ... }:
 
 {
   imports = [
     ../modules
-
-    (lib.mkAliasOptionModule
-      [ "defaults" "_impl" ]
-      [ "system" "defaults" "CustomUserPreferences" ])
   ];
+
+  system.defaults.CustomUserPreferences = config.defaults._impl;
 }

@@ -1,10 +1,10 @@
 { config, ... }:
 
 let
-  pref = config.system.defaults.CustomUserPreferences;
+  cfg = config.system.defaults.CustomUserPreferences;
 
-  cfgSafari = pref."com.apple.Safari";
-  cfgSafariSandbox = pref."com.apple.Safari.SandboxBroker";
+  cfgSafari = cfg."com.apple.Safari";
+  cfgSafariSandbox = cfg."com.apple.Safari.SandboxBroker";
 in
 
 {
