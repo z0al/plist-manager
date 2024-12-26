@@ -19,11 +19,6 @@ in
   };
 
   config.defaults._impl = {
-    "com.apple.Safari" = {
-      WebKitDeveloperExtrasEnabledPreferenceKey = cfg.devTools.enable;
-      "WebKitPreferences.developerExtrasEnabled" = cfg.devTools.enable;
-    };
-
     "com.apple.Safari.SandboxBroker" = {
       ShowDevelopMenu = cfg.devTools.enable;
     };
