@@ -21,6 +21,13 @@ in
         Whether to show file extensions in the Finder
       '';
     };
+
+    keepFoldersOnTop = mkNullableOption {
+      type = types.bool;
+      description = ''
+        Whether to keep folders on top when sorting
+      '';
+    };
   };
 
   config.defaults._impl = {
@@ -30,6 +37,7 @@ in
 
     "com.apple.finder" = {
       AppleShowAllFiles = cfg.showHidden;
+      _FXSortFoldersFirst = cfg.keepFoldersOnTop;
     };
   };
 }
