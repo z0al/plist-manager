@@ -28,7 +28,7 @@ let
 in
 
 pkgs.stdenvNoCC.mkDerivation {
-  name = "darwin-defaults-book";
+  name = "better-defaults-book";
   src = ./.;
 
   patchPhase = ''

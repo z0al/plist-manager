@@ -1,19 +1,19 @@
 # Nix Darwin
 
-1. Add `darwin-defaults` to your inputs
+1. Add `better-defaults` to your inputs
 
 ```nix
 {
 	inputs = {
 		# ... other inputs
-		darwin-defaults.url = "github:z0al/better-defaults.nix";
-		darwin-defaults.inputs.nixpkgs.follows = "nixpkgs";
-		darwin-defaults.inputs.nix-darwin.follows = "nix-darwin";
+		better-defaults.url = "github:z0al/better-defaults.nix";
+		better-defaults.inputs.nixpkgs.follows = "nixpkgs";
+		better-defaults.inputs.nix-darwin.follows = "nix-darwin";
 	};
 }
 ```
 
-2. Add `darwin-defaults.darwinModules.default` to your nix-darwin modules
+2. Add `better-defaults.darwinModules.default` to your nix-darwin modules
 
 ```nix
 {
@@ -21,7 +21,7 @@
 		hostname = darwin.lib.darwinSystem {
 			modules = [
 				# ... other modules
-				darwin-defaults.darwinModules.default
+				better-defaults.darwinModules.default
 			];
 		};
 	};
