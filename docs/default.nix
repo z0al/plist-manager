@@ -21,9 +21,10 @@ let
     builtins.elemAt option.loc 1 == prefix
   );
 
+  desktop = makeOptionsDoc darwinSystem (hasPrefix "desktop");
   dock = makeOptionsDoc darwinSystem (hasPrefix "dock");
   finder = makeOptionsDoc darwinSystem (hasPrefix "finder");
-  desktop = makeOptionsDoc darwinSystem (hasPrefix "desktop");
+  safari = makeOptionsDoc darwinSystem (hasPrefix "safari");
 in
 
 pkgs.stdenvNoCC.mkDerivation {
@@ -36,6 +37,7 @@ pkgs.stdenvNoCC.mkDerivation {
     sed '/*Declared by:*/,/^$/d' <${desktop.optionsCommonMark} >>src/options/desktop.md
     sed '/*Declared by:*/,/^$/d' <${dock.optionsCommonMark} >>src/options/dock.md
     sed '/*Declared by:*/,/^$/d' <${finder.optionsCommonMark} >>src/options/finder.md
+    sed '/*Declared by:*/,/^$/d' <${safari.optionsCommonMark} >>src/options/safari.md
   '';
 
   buildPhase = ''

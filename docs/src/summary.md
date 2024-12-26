@@ -10,3 +10,4 @@
 - [Desktop](./options/desktop.md)
 - [Dock](./options/dock.md)
 - [Finder](./options/finder.md)
+- [Safari](./options/safari.md)
