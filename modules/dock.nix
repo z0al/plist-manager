@@ -82,7 +82,7 @@ in
     tilesize = cfg.size;
     show-recents = cfg.showRecentApps;
     mineffect = cfg.minimize.effect;
-    minimize-to-application-icon = cfg.minimize.toApplicationIcon;
+    minimize-to-application = cfg.minimize.toApplicationIcon;
 
     # Auto hide
     autohide = cfg.autoHide.enable;

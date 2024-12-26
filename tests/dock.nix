@@ -60,7 +60,7 @@ in
 
     {
       message = "expects dock minimize to not minimize to application icon";
-      assertion = cfg.minimize-to-application-icon == false;
+      assertion = cfg.minimize-to-application == false;
     }
   ];
 }
