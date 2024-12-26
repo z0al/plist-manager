@@ -42,6 +42,13 @@ in
         Whether to show connected servers on the desktop
       '';
     };
+
+    keepFoldersOnTop = mkNullableOption {
+      type = types.bool;
+      description = ''
+        Whether to keep folders on top when sorting
+      '';
+    };
   };
 
   config.defaults._impl."com.apple.finder" = {
@@ -50,5 +57,6 @@ in
     ShowExternalHardDrivesOnDesktop = cfg.showExternalDisks;
     ShowRemovableMediaOnDesktop = cfg.showRemovableMedia;
     ShowMountedServersOnDesktop = cfg.showConnectedServers;
+    _FXSortFoldersFirstOnDesktop = cfg.keepFoldersOnTop;
   };
 }
