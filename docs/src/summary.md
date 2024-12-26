@@ -7,5 +7,6 @@
 
 # Reference
 
+- [Desktop](./options/desktop.md)
 - [Dock](./options/dock.md)
 - [Finder](./options/finder.md)
