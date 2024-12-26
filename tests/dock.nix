@@ -7,6 +7,7 @@ in
 {
   defaults.dock = {
     position = "left";
+    size = 24;
 
     autoHide = {
       enable = true;
@@ -19,6 +20,11 @@ in
     {
       message = "expects dock position to equal 'left'";
       assertion = pref."com.apple.dock".orientation == "left";
+    }
+
+    {
+      message = "expects dock size to equal 24";
+      assertion = pref."com.apple.dock".tilesize == 24;
     }
 
     {

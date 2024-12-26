@@ -19,6 +19,13 @@ in
       '';
     };
 
+    size = mkNullableOption {
+      type = types.int;
+      description = ''
+        Size of the dock icons. The default is 64
+      '';
+    };
+
     autoHide = {
       enable = mkNullableOption {
         type = types.bool;
@@ -46,6 +53,7 @@ in
   config.defaults._impl."com.apple.dock" = {
     # Position
     orientation = cfg.position;
+    tilesize = cfg.size;
 
     # Auto hide
     autohide = cfg.autoHide.enable;
