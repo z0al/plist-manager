@@ -22,7 +22,7 @@ in
     size = mkNullableOption {
       type = types.int;
       description = ''
-        Size of the dock icons. The default is 64
+        Size of the dock icons
       '';
     };
 
@@ -55,12 +55,34 @@ in
         '';
       };
     };
+
+    minimize = {
+      effect = mkNullableOption {
+        type = types.enum [
+          "genie"
+          "scale"
+          "suck"
+        ];
+        description = ''
+          Sets the effect of minimizing windows
+        '';
+      };
+
+      toApplicationIcon = mkNullableOption {
+        type = types.bool;
+        description = ''
+          Whether to minimize windows to the application icon
+        '';
+      };
+    };
   };
 
   config.defaults._impl."com.apple.dock" = {
     orientation = cfg.position;
     tilesize = cfg.size;
     show-recents = cfg.showRecentApps;
+    mineffect = cfg.minimize.effect;
+    minimize-to-application-icon = cfg.minimize.toApplicationIcon;
 
     # Auto hide
     autohide = cfg.autoHide.enable;

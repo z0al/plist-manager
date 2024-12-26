@@ -15,6 +15,11 @@ in
       delay = 0.5;
       animationDelay = 0.5;
     };
+
+    minimize = {
+      effect = "scale";
+      toApplicationIcon = false;
+    };
   };
 
   assertions = [
@@ -46,6 +51,16 @@ in
     {
       message = "expects dock auto-hide time modifier to equal 0.5";
       assertion = pref."com.apple.dock".autohide-time-modifier == 0.5;
+    }
+
+    {
+      message = "expects dock minimize effect to equal 'scale'";
+      assertion = pref."com.apple.dock".mineffect == "scale";
+    }
+
+    {
+      message = "expects dock minimize to not minimize to application icon";
+      assertion = pref."com.apple.dock".minimize-to-application-icon == false;
     }
   ];
 }
