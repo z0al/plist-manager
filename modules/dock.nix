@@ -26,6 +26,13 @@ in
       '';
     };
 
+    showRecentApps = mkNullableOption {
+      type = types.bool;
+      description = ''
+        Whether to show recent applications in the Dock
+      '';
+    };
+
     autoHide = {
       enable = mkNullableOption {
         type = types.bool;
@@ -51,9 +58,9 @@ in
   };
 
   config.defaults._impl."com.apple.dock" = {
-    # Position
     orientation = cfg.position;
     tilesize = cfg.size;
+    show-recents = cfg.showRecentApps;
 
     # Auto hide
     autohide = cfg.autoHide.enable;

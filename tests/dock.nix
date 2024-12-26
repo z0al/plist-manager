@@ -8,6 +8,7 @@ in
   defaults.dock = {
     position = "left";
     size = 24;
+    showRecentApps = false;
 
     autoHide = {
       enable = true;
@@ -25,6 +26,11 @@ in
     {
       message = "expects dock size to equal 24";
       assertion = pref."com.apple.dock".tilesize == 24;
+    }
+
+    {
+      message = "expects dock to not show recent apps";
+      assertion = pref."com.apple.dock".show-recents == false;
     }
 
     {
