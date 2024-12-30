@@ -24,7 +24,6 @@ let
 
           options.test = lib.mkOption {
             type = lib.types.lines;
-            default = "";
           };
 
           config = {

@@ -18,15 +18,13 @@ let
 
       toArg = value:
         let
-          str = builtins.toString;
-
           quote = val:
             "'${lib.strings.escape [ "'" ] val}'";
         in
-        if lib.isBool value then "-bool ${str value}"
-        else if lib.isInt value then "-int ${str value}"
-        else if lib.isFloat value then "-float ${str value}"
-        else if lib.isString value then "-string ${quote (str value)}"
+        if lib.isBool value then "-bool ${toString value}"
+        else if lib.isInt value then "-int ${toString value}"
+        else if lib.isFloat value then "-float ${toString value}"
+        else if lib.isString value then "-string ${quote (toString value)}"
         else abort "unsupported plist value"
       ;
 
