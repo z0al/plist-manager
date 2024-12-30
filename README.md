@@ -11,8 +11,6 @@ This feature is crucial for configurations that are conditionally set, e.g., `NS
 
 The rule also enforces that all configuration adjustments be applied via Nix; otherwise, you risk losing your changes during every nix-darwin system activation. Currently, this only applies to the configurations supported by the module. As the module expands, the likelihood of losing unsaved changes increases, so ensure you regularly apply the configurations you care about using PM.
 
-Alternatively, one might argue that it's better to keep track of previous configuration values and revert them if they are no longer set via Nix. However, I personally believe this approach adds unnecessary mental overhead and can make the behavior harder to predict and reason about.
-
 ## Documentation
 
 See installation instructions and available options at https://z0al.github.io/plist-manager

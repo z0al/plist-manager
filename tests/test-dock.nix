@@ -3,7 +3,7 @@
     ../modules/dock.nix
   ];
 
-  defaults.dock = {
+  plist.dock = {
     position = "left";
     size = 24;
     showRecentApps = false;

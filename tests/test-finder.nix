@@ -3,7 +3,7 @@
     ../modules/finder.nix
   ];
 
-  defaults.finder = {
+  plist.finder = {
     showHidden = true;
     showExtensions = true;
     keepFoldersOnTop = true;

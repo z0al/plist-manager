@@ -10,7 +10,7 @@ let
   mkCond = cond: value:
     if cond == true then value else null;
 
-  writeDefaults = values:
+  writePlist = values:
     let
 
       toDomain = domain:
@@ -28,7 +28,7 @@ let
         else abort "unsupported plist value"
       ;
 
-      writeDefault = domain: key: value:
+      writeOrDelete = domain: key: value:
         if value == null then
           "/usr/bin/defaults delete ${domain} '${key}' &> /dev/null || true"
         else
@@ -39,10 +39,10 @@ let
       lib.flatten (
         lib.mapAttrsToList
           (domain: attrs:
-            lib.mapAttrsToList (writeDefault (toDomain domain)) attrs)
+            lib.mapAttrsToList (writeOrDelete (toDomain domain)) attrs)
           values));
 in
 
 {
-  inherit mkNullableOption mkCond writeDefaults;
+  inherit mkNullableOption mkCond writePlist;
 }

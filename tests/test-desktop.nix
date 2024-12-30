@@ -3,7 +3,7 @@
     ../modules/desktop.nix
   ];
 
-  defaults.desktop = {
+  plist.desktop = {
     showIcons = true;
     showHardDisks = true;
     showExternalDisks = true;

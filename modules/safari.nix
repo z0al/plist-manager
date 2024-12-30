@@ -1,13 +1,13 @@
 { config, pkgs, lib, ... }:
 
 let
-  cfg = config.defaults.safari;
+  cfg = config.plist.safari;
 
-  inherit (pkgs.callPackage ../lib { }) mkNullableOption writeDefaults;
+  inherit (pkgs.callPackage ../lib { }) mkNullableOption writePlist;
 in
 
 {
-  options.defaults.safari = with lib; {
+  options.plist.safari = with lib; {
     devTools = {
       enable = mkNullableOption {
         type = types.bool;
@@ -18,7 +18,7 @@ in
     };
   };
 
-  config.defaults.out = writeDefaults {
+  config.plist.out = writePlist {
     "com.apple.Safari.SandboxBroker" = {
       ShowDevelopMenu = cfg.devTools.enable;
     };

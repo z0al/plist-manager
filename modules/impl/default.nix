@@ -1,7 +1,7 @@
 { lib, ... }:
 
 {
-  options.defaults = {
+  options.plist = {
     out = with lib; mkOption {
       type = types.lines;
       default = "";

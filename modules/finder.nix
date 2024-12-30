@@ -1,13 +1,13 @@
 { config, pkgs, lib, ... }:
 
 let
-  cfg = config.defaults.finder;
+  cfg = config.plist.finder;
 
-  inherit (pkgs.callPackage ../lib { }) mkNullableOption writeDefaults;
+  inherit (pkgs.callPackage ../lib { }) mkNullableOption writePlist;
 in
 
 {
-  options.defaults.finder = with lib; {
+  options.plist.finder = with lib; {
     showHidden = mkNullableOption {
       type = types.bool;
       description = ''
@@ -30,7 +30,7 @@ in
     };
   };
 
-  config.defaults.out = writeDefaults {
+  config.plist.out = writePlist {
     NSGlobalDomain = {
       AppleShowAllExtensions = cfg.showExtensions;
     };

@@ -3,7 +3,7 @@
     ../modules/safari.nix
   ];
 
-  defaults.safari = {
+  plist.safari = {
     devTools.enable = true;
   };
 

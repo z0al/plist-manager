@@ -3,10 +3,10 @@
     ../modules
   ];
 
-  defaults.desktop.showIcons = null;
-  defaults.dock.position = null;
-  defaults.finder.showHidden = null;
-  defaults.safari.devTools.enable = null;
+  plist.desktop.showIcons = null;
+  plist.dock.position = null;
+  plist.finder.showHidden = null;
+  plist.safari.devTools.enable = null;
 
   test = ''
     has "defaults delete com.apple.finder 'CreateDesktop'"

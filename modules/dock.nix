@@ -1,13 +1,13 @@
 { config, pkgs, lib, ... }:
 
 let
-  cfg = config.defaults.dock;
+  cfg = config.plist.dock;
 
-  inherit (pkgs.callPackage ../lib { }) mkCond mkNullableOption writeDefaults;
+  inherit (pkgs.callPackage ../lib { }) mkCond mkNullableOption writePlist;
 in
 
 {
-  options.defaults.dock = with lib; {
+  options.plist.dock = with lib; {
     position = mkNullableOption {
       type = types.enum [
         "bottom"
@@ -77,7 +77,7 @@ in
     };
   };
 
-  config.defaults.out = writeDefaults {
+  config.plist.out = writePlist {
     "com.apple.dock" = {
       orientation = cfg.position;
       tilesize = cfg.size;

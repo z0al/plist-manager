@@ -11,6 +11,6 @@
         (cmd: "run ${cmd}")
         (lib.filter
           (v: lib.trim v != "")
-          (lib.splitString "\n" config.defaults.out)))}
+          (lib.splitString "\n" config.plist.out)))}
   '';
 }

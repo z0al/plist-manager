@@ -37,7 +37,7 @@ let
               { }
               ''
                 set -e
-                echo ${lib.escapeShellArg config.defaults.out} > $out
+                echo ${lib.escapeShellArg config.plist.out} > $out
 
                 function has {
                   if ! grep -q "$1" $out; then

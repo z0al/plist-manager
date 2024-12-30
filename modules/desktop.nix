@@ -1,13 +1,13 @@
 { config, pkgs, lib, ... }:
 
 let
-  cfg = config.defaults.desktop;
+  cfg = config.plist.desktop;
 
-  inherit (pkgs.callPackage ../lib { }) mkNullableOption writeDefaults;
+  inherit (pkgs.callPackage ../lib { }) mkNullableOption writePlist;
 in
 
 {
-  options.defaults.desktop = with lib; {
+  options.plist.desktop = with lib; {
     showIcons = mkNullableOption {
       type = types.bool;
       description = ''
@@ -51,7 +51,7 @@ in
     };
   };
 
-  config.defaults.out = writeDefaults {
+  config.plist.out = writePlist {
     "com.apple.finder" = {
       CreateDesktop = cfg.showIcons;
       ShowHardDrivesOnDesktop = cfg.showHardDisks;
