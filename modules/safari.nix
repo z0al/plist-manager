@@ -13,6 +13,9 @@ in
         type = types.bool;
         description = ''
           Whether to enable the developer tools in Safari
+
+          _Affects:_
+          - "com.apple.Safari.SandboxBroker".ShowDevelopMenu
         '';
       };
     };

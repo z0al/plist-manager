@@ -12,6 +12,9 @@ in
       type = types.bool;
       description = ''
         Whether to show icons on the desktop
+
+        _Affects:_
+        - "com.apple.finder".CreateDesktop
       '';
     };
 
@@ -19,6 +22,9 @@ in
       type = types.bool;
       description = ''
         Whether to show hard disks on the desktop
+
+        _Affects:_
+        - "com.apple.finder".ShowHardDrivesOnDesktop
       '';
     };
 
@@ -26,6 +32,9 @@ in
       type = types.bool;
       description = ''
         Whether to show external disks on the desktop
+
+        _Affects:_
+        - "com.apple.finder".ShowExternalHardDrivesOnDesktop
       '';
     };
 
@@ -33,6 +42,9 @@ in
       type = types.bool;
       description = ''
         Whether to show removable media (CDs, DVDs and iPods) on the desktop
+
+        _Affects:_
+        - "com.apple.finder".ShowRemovableMediaOnDesktop
       '';
     };
 
@@ -40,6 +52,9 @@ in
       type = types.bool;
       description = ''
         Whether to show connected servers on the desktop
+
+        _Affects:_
+        - "com.apple.finder".ShowMountedServersOnDesktop
       '';
     };
 
@@ -47,6 +62,9 @@ in
       type = types.bool;
       description = ''
         Whether to keep folders on top when sorting
+
+        _Affects:_
+        - "com.apple.finder"._FXSortFoldersFirstOnDesktop
       '';
     };
   };
