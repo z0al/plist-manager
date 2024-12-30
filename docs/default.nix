@@ -28,7 +28,7 @@ let
 in
 
 pkgs.stdenvNoCC.mkDerivation {
-  name = "better-defaults-book";
+  name = "plist-manager-book";
   src = ./.;
 
   patchPhase = ''

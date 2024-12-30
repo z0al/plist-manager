@@ -1,18 +1,18 @@
 # Home Manager
 
-1. Add `better-defaults` to your inputs
+1. Add `plist-manager` to your inputs
 
 ```nix
 {
 	inputs = {
 		# ... other inputs
-		better-defaults.url = "github:z0al/better-defaults.nix";
-		better-defaults.inputs.nixpkgs.follows = "nixpkgs";
+		plist-manager.url = "github:z0al/plist-manager";
+		plist-manager.inputs.nixpkgs.follows = "nixpkgs";
 	};
 }
 ```
 
-2. Add `better-defaults.homeManagerModules.default` to your home-manager modules
+2. Add `plist-manager.homeManagerModules.default` to your home-manager modules
 
 ```nix
 {
@@ -20,7 +20,7 @@
 		userName = home-manager.lib.homeManagerConfiguration {
 			modules = [
 				# ... other modules
-				better-defaults.homeManagerModules.default
+				plist-manager.homeManagerModules.default
 			];
 		};
 	};

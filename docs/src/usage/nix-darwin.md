@@ -1,19 +1,18 @@
 # Nix Darwin
 
-1. Add `better-defaults` to your inputs
+1. Add `plist-manager` to your inputs
 
 ```nix
 {
 	inputs = {
 		# ... other inputs
-		better-defaults.url = "github:z0al/better-defaults.nix";
-		better-defaults.inputs.nixpkgs.follows = "nixpkgs";
-		better-defaults.inputs.nix-darwin.follows = "nix-darwin";
+		plist-manager.url = "github:z0al/plist-manager";
+		plist-manager.inputs.nixpkgs.follows = "nixpkgs";
 	};
 }
 ```
 
-2. Add `better-defaults.darwinModules.default` to your nix-darwin modules
+2. Add `plist-manager.darwinModules.default` to your nix-darwin modules
 
 ```nix
 {
@@ -21,7 +20,7 @@
 		hostname = darwin.lib.darwinSystem {
 			modules = [
 				# ... other modules
-				better-defaults.darwinModules.default
+				plist-manager.darwinModules.default
 			];
 		};
 	};

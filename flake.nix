@@ -1,5 +1,5 @@
 {
-  description = "Declarative darwin user defaults";
+  description = "Nix-Based macOS User Defaults Done Right";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
