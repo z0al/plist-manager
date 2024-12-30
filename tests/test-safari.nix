@@ -1,4 +1,8 @@
 {
+  imports = [
+    ../modules/safari.nix
+  ];
+
   defaults.safari = {
     devTools.enable = true;
   };

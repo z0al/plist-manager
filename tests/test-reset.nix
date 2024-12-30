@@ -1,4 +1,8 @@
 {
+  imports = [
+    ../modules
+  ];
+
   defaults.desktop.showIcons = null;
   defaults.dock.position = null;
   defaults.finder.showHidden = null;

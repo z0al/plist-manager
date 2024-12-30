@@ -1,24 +1,28 @@
-{ self
-, nixpkgs
-, nix-darwin
+{ pkgs
+, inputs
 , system
 }:
 
 let
+  lib = pkgs.lib;
+
   buildFromConfig = configuration: sel: sel
-    (import nix-darwin { inherit nixpkgs configuration system; }).config;
+    (import inputs.nix-darwin {
+      inherit (inputs) nixpkgs;
+      inherit configuration system;
+    }).config;
 
-  makeTest = test:
+  testName = file:
+    builtins.replaceStrings [ ".nix" ] [ "" ]
+      (builtins.baseNameOf file);
+
+  makeTest = name: test:
     let
-      testName =
-        builtins.replaceStrings [ ".nix" ] [ "" ]
-          (builtins.baseNameOf test);
-
       configuration =
         { config, pkgs, lib, ... }:
         {
           imports = [
-            self.darwinModules.default
+            ../modules/impl
             test
           ];
 
@@ -29,13 +33,11 @@ let
           config = {
             system.stateVersion = config.system.maxStateVersion;
 
-            system.build.run-test = pkgs.runCommandLocal "test-${testName}"
+            system.build.run-test = pkgs.runCommandLocal name
               { }
               ''
                 set -e
-                echo ${
-                  lib.escapeShellArg
-                  config.system.activationScripts.postActivation.text} > $out
+                echo ${lib.escapeShellArg config.defaults.out} > $out
 
                 function has {
                   if ! grep -q "$1" $out; then
@@ -52,7 +54,7 @@ let
                   fi
                 }
 
-                echo "Running '${testName}' tests"
+                echo "Running '${name}'"
                 ${config.test}
               '';
           };
@@ -61,10 +63,10 @@ let
     buildFromConfig configuration (config: config.system.build.run-test);
 in
 
-{
-  desktop = makeTest ./test-desktop.nix;
-  dock = makeTest ./test-dock.nix;
-  finder = makeTest ./test-finder.nix;
-  reset = makeTest ./test-reset.nix;
-  safari = makeTest ./test-safari.nix;
-}
+lib.listToAttrs (map
+  (file: rec {
+    name = testName file;
+    value = makeTest name file;
+  })
+  (lib.fileset.toList
+    (lib.fileset.fileFilter (file: lib.hasPrefix "test-" file.name) ./.)))

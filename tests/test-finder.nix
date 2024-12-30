@@ -1,4 +1,8 @@
 {
+  imports = [
+    ../modules/finder.nix
+  ];
+
   defaults.finder = {
     showHidden = true;
     showExtensions = true;

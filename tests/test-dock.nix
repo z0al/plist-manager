@@ -1,4 +1,8 @@
 {
+  imports = [
+    ../modules/dock.nix
+  ];
+
   defaults.dock = {
     position = "left";
     size = 24;

@@ -1,4 +1,8 @@
 {
+  imports = [
+    ../modules/desktop.nix
+  ];
+
   defaults.desktop = {
     showIcons = true;
     showHardDisks = true;

@@ -25,13 +25,14 @@
 
       perSystem = { system, ... }:
         let
+          pkgs = nixpkgs.legacyPackages.${system};
+
           tests = import ./tests/setup.nix {
-            inherit self nixpkgs system nix-darwin;
+            inherit pkgs inputs system;
           };
 
           docs = import ./docs {
-            inherit nixpkgs system inputs;
-            pkgs = nixpkgs.legacyPackages.${system};
+            inherit pkgs inputs system;
           };
         in
 
