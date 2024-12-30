@@ -36,6 +36,16 @@ in
       '';
     };
 
+    naturalScrolling = mkNullableOption {
+      type = types.bool;
+      description = ''
+        Whether to move the contents of a window in the same direction as your fingers
+
+        _Affects:_
+        - "NSGlobalDomain"."com.apple.swipescrolldirection"
+      '';
+    };
+
     draggingStyle = mkNullableOption {
       type = types.enum [
         "double-tap"
@@ -46,9 +56,9 @@ in
       description = ''
         Adjust the trackpad dragging style:
 
-        - **Double Tap**: Double-tap an item, then drag it without lifting your finger after the second tap; when you lift your finger, the item stops moving.
-        - **Double Tap Lock**: Double-tap an item, then drag it without lifting your finger after the second tap; dragging continues when you lift your finger, and stops when you tap the trackpad once.
-        - **Three Fingers**: Drag an item with three fingers; dragging stops when you lift your fingers
+        - _Double Tap_: Double-tap an item to drag with lifting your fingers. Dragging continues if you briefly lift your fingers; otherwise, it stops.
+        - _Double Tap Lock_: Double-tap an item to drag without lifting your fingers. Dragging continues even after you lift your fingers until you tap once again.
+        - _Three Fingers_: Drag an item with three fingers. Dragging continues if you briefly lift your fingers; otherwise, it stops.
 
         _Affects:_
         - "com.apple.AppleMultitouchTrackpad"."DragLock"
@@ -74,6 +84,7 @@ in
   config.plist.out = writePlist {
     NSGlobalDomain = {
       "com.apple.trackpad.scaling" = cfg.speed;
+      "com.apple.swipescrolldirection" = cfg.naturalScrolling;
     };
 
     "com.apple.AppleMultitouchTrackpad" = multiTouchOptions;

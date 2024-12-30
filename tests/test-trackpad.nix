@@ -6,6 +6,7 @@
   plist.trackpad = {
     speed = 2;
     tapToClick = true;
+    naturalScrolling = true;
     draggingStyle = "double-tap";
   };
 
@@ -13,6 +14,7 @@
     has "write -g 'com.apple.trackpad.scaling' -int 2"
     has "write 'com.apple.AppleMultitouchTrackpad' 'Clicking' -bool 1"
     has "write 'com.apple.driver.AppleBluetoothMultitouch.trackpad' 'Clicking' -bool 1"
+    has "write -g 'com.apple.swipescrolldirection' -bool 1"
 
     # dragging style: double-tap
     has "write 'com.apple.AppleMultitouchTrackpad' 'Dragging' -bool 1"
