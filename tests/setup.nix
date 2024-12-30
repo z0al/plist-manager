@@ -66,5 +66,6 @@ in
   desktop = makeTest ./test-desktop.nix;
   dock = makeTest ./test-dock.nix;
   finder = makeTest ./test-finder.nix;
+  reset = makeTest ./test-reset.nix;
   safari = makeTest ./test-safari.nix;
 }
