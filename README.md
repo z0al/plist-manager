@@ -15,7 +15,9 @@ The _null equals reset_ rule makes this module particularly useful, as it ensure
 
 This feature is crucial for configurations that are conditionally set, e.g., `NSGlobalDomain.AppleInterfaceStyle`, which is removed if the user opts for Light or Auto appearance mode.
 
-The rule also enforces that all configuration adjustments be applied via Nix; otherwise, you risk losing your changes during every nix-darwin system activation. Currently, this applies only to the configurations supported by the module. As the module expands, the likelihood of losing unsaved changes increases, so ensure you regularly apply the configurations you care about using Nix.
+The rule also enforces that all configuration adjustments be applied via Nix; otherwise, you risk losing your changes during every nix-darwin system activation. Currently, this applies only to the configurations supported by the module. As the module expands, the likelihood of losing changes done outside Nix increases, so ensure you regularly apply the configurations you care about using Nix.
+
+While this might sound intimidating, in practice, reverting to device defaults is usually fine and makes reasoning about how the module works much easier.
 
 ## Installation
 
