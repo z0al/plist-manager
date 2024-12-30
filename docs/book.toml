@@ -1,8 +1,15 @@
 [book]
-title = "Better Darwin Defaults"
-description = "Declarative & human-friendly darwin user defaults"
+title = "Plist Manager"
+description = "Nix-Based macOS User Defaults Done Right"
+language = "en"
+multilingual = false
+src = "src"
 
 [output.html]
 site-url = "/plist-manager/"
 git-repository-url = "https://github.com/z0al/plist-manager"
-edit-url-template = "https://github.com/z0al/plist-manager/edit/master/docs/{path}"
+
+[preprocessor.toc]
+command = "mdbook-toc"
+max-level = 3
+renderer = ["html"]

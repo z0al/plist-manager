@@ -32,26 +32,58 @@ let
     ];
   });
 
-  hasPrefix = prefix: (option:
-    builtins.elemAt option.loc 0 == "defaults" &&
+  optionsWithPrefix = prefix: (option:
+    builtins.elemAt option.loc 0 == "plist" &&
     builtins.elemAt option.loc 1 == prefix
   );
 
-  desktop = makeOptionsDoc darwinSystem (hasPrefix "desktop");
-  dock = makeOptionsDoc darwinSystem (hasPrefix "dock");
-  finder = makeOptionsDoc darwinSystem (hasPrefix "finder");
-  safari = makeOptionsDoc darwinSystem (hasPrefix "safari");
+  # Keep this list sorted alphabetically
+  headers = [
+    "Desktop"
+    "Dock"
+    "Finder"
+    "Safari"
+  ];
+
+  referenceSections = map
+    (name:
+      {
+        title = name;
+        file = (
+          makeOptionsDoc darwinSystem (optionsWithPrefix (lib.toLower name))
+        ).optionsCommonMark;
+      })
+    headers;
 in
 
 pkgs.stdenvNoCC.mkDerivation {
   name = "plist-manager-book";
   src = ./.;
 
+  buildInputs = with pkgs; [
+    mdbook
+    mdbook-toc
+  ];
+
   patchPhase = ''
-    cat ${desktop.optionsCommonMark} >>src/options/desktop.md
-    cat ${dock.optionsCommonMark} >>src/options/dock.md
-    cat ${finder.optionsCommonMark} >>src/options/finder.md
-    cat ${safari.optionsCommonMark} >>src/options/safari.md
+    # Copy the introduction from the README
+    sed -n '/^<!-- MANUAL START -->/,/^<!-- MANUAL END -->/p' \
+      ${../README.md} >> src/index.md
+
+    # Prefix table content with header
+    sed -i -e 's/<!-- toc -->/**Table Of Contents**\n<!-- toc -->/g' \
+      src/index.md
+
+    # Add reference sections
+    printf "\n## Reference\n\n" >> src/index.md
+    ${lib.concatLines(
+      map (section: ''
+        printf "\n### ${section.title}\n\n" >> src/index.md
+
+        # Force headers to be level 4
+        sed -e 's/##/####/g' <${section.file} >> src/index.md
+      '')
+      referenceSections)}
   '';
 
   buildPhase = ''

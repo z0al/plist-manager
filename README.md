@@ -1,15 +1,66 @@
-# Property List Manager (aka PM)
+# Plist Manager
 
-A Nix module for managing macOS user defaults. Unlike the built-in `defaults.*` modules offered by [nix-darwin] and [home-manager], PM provides the following advantages:
+<!-- MANUAL START -->
+
+<!-- toc -->
+
+## Introduction
+
+Plist Manager (PM) is a Nix module for managing macOS user defaults. Unlike the built-in `defaults.*` modules offered by [nix-darwin] and [home-manager], PM provides the following advantages:
 
 - Human-friendly naming of domains and options, e.g., `safari.devTools.enable`.
 - Unsetting an option or explicitly setting it to `null` _resets_ its value, effectively performing a `defaults delete <domain> <option>` command.
 
-The _null equals reset_ rule is what makes this module particularly useful, as it ensures that an option previously set gets restored to the system default.
+The _null equals reset_ rule makes this module particularly useful, as it ensures that an option previously set is restored to the system default.
 
-This feature is crucial for configurations that are conditionally set, e.g., `NSGlobalDomain.AppleInterfaceStyle`, which gets removed if the user opts for Light or Auto appearance mode. At the time of writing, it is not possible to [unset a configuration value with the native nix-darwin module](https://github.com/LnL7/nix-darwin/issues/88).
+This feature is crucial for configurations that are conditionally set, e.g., `NSGlobalDomain.AppleInterfaceStyle`, which is removed if the user opts for Light or Auto appearance mode.
 
-The rule also enforces that all configuration adjustments be applied via Nix; otherwise, you risk losing your changes during every nix-darwin system activation. Currently, this only applies to the configurations supported by the module. As the module expands, the likelihood of losing unsaved changes increases, so ensure you regularly apply the configurations you care about using PM.
+The rule also enforces that all configuration adjustments be applied via Nix; otherwise, you risk losing your changes during every nix-darwin system activation. Currently, this applies only to the configurations supported by the module. As the module expands, the likelihood of losing unsaved changes increases, so ensure you regularly apply the configurations you care about using Nix.
+
+## Installation
+
+To get started, add `plist-manager` to your [Nix flake](https://nix.dev/concepts/flakes) inputs:
+
+```nix
+{
+  inputs.plist-manager.url = "github:z0al/plist-manager";
+  inputs.plist-manager.inputs.nixpkgs.follows = "nixpkgs";
+}
+```
+
+Plist Manager provides Nix modules for both [nix-darwin] and [home-manager]. You should use either one, but NOT both, to avoid behavior conflicts.
+
+### For nix-darwin users
+
+Add `plist-manager.darwinModules.default` to your nix-darwin modules:
+
+```nix
+{
+	darwinConfigurations.hostname = darwin.lib.darwinSystem {
+    modules = [
+      # ... other modules
+      plist-manager.darwinModules.default
+    ];
+  };
+}
+```
+
+### For home-manager users
+
+Add `plist-manager.homeManagerModules.default` to your home-manager modules:
+
+```nix
+{
+	homeConfigurations.userName = home-manager.lib.homeManagerConfiguration {
+    modules = [
+      # ... other modules
+      plist-manager.homeManagerModules.default
+    ];
+  };
+}
+```
+
+<!-- MANUAL END -->
 
 ## Documentation
 
