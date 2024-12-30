@@ -5,7 +5,7 @@
     ../modules
   ];
 
-  home.activation.plist-manager = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  home.activation.plistManager = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     ${lib.concatLines
       (map
         (cmd: "run ${cmd}")

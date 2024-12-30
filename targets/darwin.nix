@@ -6,7 +6,7 @@
   ];
 
   system.activationScripts.postActivation.text = ''
-    echo "Activating plist-manager"
+    echo "Activating plistManager"
     ${config.plist.out}
   '';
 }
