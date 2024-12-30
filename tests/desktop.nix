@@ -1,9 +1,3 @@
-{ config, ... }:
-
-let
-  cfg = config.system.defaults.CustomUserPreferences."com.apple.finder";
-in
-
 {
   defaults.desktop = {
     showIcons = true;
@@ -14,35 +8,12 @@ in
     keepFoldersOnTop = true;
   };
 
-  assertions = [
-    {
-      message = "expects icons to be shown in desktop";
-      assertion = cfg.CreateDesktop == true;
-    }
-
-    {
-      message = "expects hard disks to be shown in desktop";
-      assertion = cfg.ShowHardDrivesOnDesktop == true;
-    }
-
-    {
-      message = "expects external disks to be shown in desktop";
-      assertion = cfg.ShowExternalHardDrivesOnDesktop == true;
-    }
-
-    {
-      message = "expects removable media to be shown in desktop";
-      assertion = cfg.ShowRemovableMediaOnDesktop == true;
-    }
-
-    {
-      message = "expects connected servers to be shown in desktop";
-      assertion = cfg.ShowMountedServersOnDesktop == true;
-    }
-
-    {
-      message = "expects folders to be kept on top when sorting in desktop";
-      assertion = cfg._FXSortFoldersFirstOnDesktop == true;
-    }
-  ];
+  test = ''
+    has "write com.apple.finder 'CreateDesktop' -bool 1"
+    has "write com.apple.finder 'ShowHardDrivesOnDesktop' -bool 1"
+    has "write com.apple.finder 'ShowExternalHardDrivesOnDesktop' -bool 1"
+    has "write com.apple.finder 'ShowRemovableMediaOnDesktop' -bool 1"
+    has "write com.apple.finder '_FXSortFoldersFirstOnDesktop' -bool 1"
+    has "write com.apple.finder 'ShowMountedServersOnDesktop' -bool 1"
+  '';
 }

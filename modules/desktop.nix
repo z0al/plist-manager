@@ -3,7 +3,7 @@
 let
   cfg = config.defaults.desktop;
 
-  inherit (pkgs.callPackage ../lib { }) mkNullableOption;
+  inherit (pkgs.callPackage ../lib { }) mkNullableOption writeDefaults;
 in
 
 {
@@ -51,12 +51,14 @@ in
     };
   };
 
-  config.defaults._impl."com.apple.finder" = {
-    CreateDesktop = cfg.showIcons;
-    ShowHardDrivesOnDesktop = cfg.showHardDisks;
-    ShowExternalHardDrivesOnDesktop = cfg.showExternalDisks;
-    ShowRemovableMediaOnDesktop = cfg.showRemovableMedia;
-    ShowMountedServersOnDesktop = cfg.showConnectedServers;
-    _FXSortFoldersFirstOnDesktop = cfg.keepFoldersOnTop;
+  config.defaults.out = writeDefaults {
+    "com.apple.finder" = {
+      CreateDesktop = cfg.showIcons;
+      ShowHardDrivesOnDesktop = cfg.showHardDisks;
+      ShowExternalHardDrivesOnDesktop = cfg.showExternalDisks;
+      ShowRemovableMediaOnDesktop = cfg.showRemovableMedia;
+      ShowMountedServersOnDesktop = cfg.showConnectedServers;
+      _FXSortFoldersFirstOnDesktop = cfg.keepFoldersOnTop;
+    };
   };
 }

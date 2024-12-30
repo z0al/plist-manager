@@ -12,10 +12,19 @@ in
     ./safari.nix
   ];
 
-  options.defaults._impl = with lib; mkNullableOption {
-    type = types.attrsOf types.anything;
-    default = { };
-    internal = true;
-    visible = false;
+  options.defaults = {
+    _impl = with lib; mkNullableOption {
+      type = types.attrsOf types.anything;
+      default = { };
+      internal = true;
+      visible = false;
+    };
+
+    out = with lib; mkOption {
+      type = types.lines;
+      default = "";
+      internal = true;
+      visible = false;
+    };
   };
 }
