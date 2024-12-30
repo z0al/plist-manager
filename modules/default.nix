@@ -6,5 +6,6 @@
     ./dock.nix
     ./finder.nix
     ./safari.nix
+    ./trackpad.nix
   ];
 }

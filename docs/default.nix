@@ -43,6 +43,7 @@ let
     "Dock"
     "Finder"
     "Safari"
+    "Trackpad"
   ];
 
   referenceSections = map

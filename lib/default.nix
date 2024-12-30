@@ -12,9 +12,9 @@ let
 
   writePlist = values:
     let
-
       toDomain = domain:
-        if domain == "NSGlobalDomain" then "-g" else domain;
+        if domain == "NSGlobalDomain" then "-g"
+        else "'${lib.strings.escape [ "'" ] domain}'";
 
       toArg = value:
         let

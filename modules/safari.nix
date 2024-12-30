@@ -15,7 +15,7 @@ in
           Whether to enable the developer tools in Safari
 
           _Affects:_
-          - "com.apple.Safari.SandboxBroker".ShowDevelopMenu
+          - "com.apple.Safari.SandboxBroker"."ShowDevelopMenu"
         '';
       };
     };

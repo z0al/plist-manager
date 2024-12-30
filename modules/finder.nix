@@ -14,7 +14,7 @@ in
         Whether to show hidden files in Finder
 
         _Affects:_
-        - "com.apple.finder".AppleShowAllFiles
+        - "com.apple.finder"."AppleShowAllFiles"
       '';
     };
 
@@ -24,7 +24,7 @@ in
         Whether to show file extensions in the Finder
 
         _Affects:_
-        - NSGlobalDomain.AppleShowAllExtensions
+        - "NSGlobalDomain"."AppleShowAllExtensions"
       '';
     };
 
@@ -34,7 +34,7 @@ in
         Whether to keep folders on top when sorting
 
         _Affects:_
-        - "com.apple.finder"._FXSortFoldersFirst
+        - "com.apple.finder"."_FXSortFoldersFirst"
       '';
     };
   };

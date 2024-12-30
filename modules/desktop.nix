@@ -14,7 +14,7 @@ in
         Whether to show icons on the desktop
 
         _Affects:_
-        - "com.apple.finder".CreateDesktop
+        - "com.apple.finder"."CreateDesktop"
       '';
     };
 
@@ -24,7 +24,7 @@ in
         Whether to show hard disks on the desktop
 
         _Affects:_
-        - "com.apple.finder".ShowHardDrivesOnDesktop
+        - "com.apple.finder"."ShowHardDrivesOnDesktop"
       '';
     };
 
@@ -34,7 +34,7 @@ in
         Whether to show external disks on the desktop
 
         _Affects:_
-        - "com.apple.finder".ShowExternalHardDrivesOnDesktop
+        - "com.apple.finder"."ShowExternalHardDrivesOnDesktop"
       '';
     };
 
@@ -44,7 +44,7 @@ in
         Whether to show removable media (CDs, DVDs and iPods) on the desktop
 
         _Affects:_
-        - "com.apple.finder".ShowRemovableMediaOnDesktop
+        - "com.apple.finder"."ShowRemovableMediaOnDesktop"
       '';
     };
 
@@ -54,7 +54,7 @@ in
         Whether to show connected servers on the desktop
 
         _Affects:_
-        - "com.apple.finder".ShowMountedServersOnDesktop
+        - "com.apple.finder"."ShowMountedServersOnDesktop"
       '';
     };
 
@@ -64,7 +64,7 @@ in
         Whether to keep folders on top when sorting
 
         _Affects:_
-        - "com.apple.finder"._FXSortFoldersFirstOnDesktop
+        - "com.apple.finder"."_FXSortFoldersFirstOnDesktop"
       '';
     };
   };

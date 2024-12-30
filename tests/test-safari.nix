@@ -8,6 +8,6 @@
   };
 
   test = ''
-    has "write com.apple.Safari.SandboxBroker 'ShowDevelopMenu' -bool 1"
+    has "write 'com.apple.Safari.SandboxBroker' 'ShowDevelopMenu' -bool 1"
   '';
 }

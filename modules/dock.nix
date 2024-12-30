@@ -18,7 +18,7 @@ in
         Position of the dock on screen
 
         _Affects:_
-        - "com.apple.dock".orientation
+        - "com.apple.dock"."orientation"
       '';
     };
 
@@ -28,7 +28,7 @@ in
         Size of the dock icons
 
         _Affects:_
-        - "com.apple.dock".tilesize
+        - "com.apple.dock"."tilesize"
       '';
     };
 
@@ -38,7 +38,7 @@ in
         Whether to show recent applications in the Dock
 
         _Affects:_
-        - "com.apple.dock".show-recents
+        - "com.apple.dock"."show-recents"
       '';
     };
 
@@ -49,7 +49,7 @@ in
           Whether to automatically hide and show the dock
 
           _Affects:_
-          - "com.apple.dock".autohide
+          - "com.apple.dock"."autohide"
         '';
       };
 
@@ -59,7 +59,7 @@ in
           Sets the speed of the auto-hide delay
 
           _Affects:_
-          - "com.apple.dock".autohide-delay
+          - "com.apple.dock"."autohide-delay"
         '';
       };
 
@@ -69,7 +69,7 @@ in
           Sets the speed of the animation when hiding/showing the Dock
 
           _Affects:_
-          - "com.apple.dock".autohide-time-modifier
+          - "com.apple.dock"."autohide-time-modifier"
         '';
       };
     };
@@ -85,7 +85,7 @@ in
           Sets the effect of minimizing windows
 
           _Affects:_
-          - "com.apple.dock".mineffect
+          - "com.apple.dock"."mineffect"
         '';
       };
 
@@ -95,7 +95,7 @@ in
           Whether to minimize windows to the application icon
 
           _Affects:_
-          - "com.apple.dock".minimize-to-application
+          - "com.apple.dock"."minimize-to-application"
         '';
       };
     };
