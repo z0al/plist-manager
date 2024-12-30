@@ -1,8 +1,4 @@
-{ pkgs, lib, ... }:
-
-let
-  inherit (pkgs.callPackage ../lib { }) mkNullableOption;
-in
+{ lib, ... }:
 
 {
   imports = [
