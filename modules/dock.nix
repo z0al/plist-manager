@@ -3,7 +3,7 @@
 let
   cfg = config.defaults.dock;
 
-  inherit (pkgs.callPackage ../lib { }) mkCond mkNullableOption;
+  inherit (pkgs.callPackage ../lib { }) mkCond mkNullableOption writeDefaults;
 in
 
 {
@@ -77,18 +77,20 @@ in
     };
   };
 
-  config.defaults._impl."com.apple.dock" = {
-    orientation = cfg.position;
-    tilesize = cfg.size;
-    show-recents = cfg.showRecentApps;
-    mineffect = cfg.minimize.effect;
-    minimize-to-application = cfg.minimize.toApplicationIcon;
+  config.defaults.out = writeDefaults {
+    "com.apple.dock" = {
+      orientation = cfg.position;
+      tilesize = cfg.size;
+      show-recents = cfg.showRecentApps;
+      mineffect = cfg.minimize.effect;
+      minimize-to-application = cfg.minimize.toApplicationIcon;
 
-    # Auto hide
-    autohide = cfg.autoHide.enable;
-    autohide-delay = mkCond cfg.autoHide.enable cfg.autoHide.delay;
-    autohide-time-modifier = mkCond
-      cfg.autoHide.enable
-      cfg.autoHide.animationDelay;
+      # Auto hide
+      autohide = cfg.autoHide.enable;
+      autohide-delay = mkCond cfg.autoHide.enable cfg.autoHide.delay;
+      autohide-time-modifier = mkCond
+        cfg.autoHide.enable
+        cfg.autoHide.animationDelay;
+    };
   };
 }

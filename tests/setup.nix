@@ -34,7 +34,9 @@ let
               { }
               ''
                 set -e
-                echo ${lib.escapeShellArg config.defaults.out} > $out
+                echo ${
+                  lib.escapeShellArg
+                  config.system.activationScripts.postActivation.text} > $out
 
                 function has {
                   if ! grep -q "$1" $out; then
@@ -61,8 +63,8 @@ let
 in
 
 {
-  desktop = makeTest ./desktop.nix;
-  dock = makeTest ./dock.nix;
-  finder = makeTest ./finder.nix;
-  safari = makeTest ./safari.nix;
+  desktop = makeTest ./test-desktop.nix;
+  dock = makeTest ./test-dock.nix;
+  finder = makeTest ./test-finder.nix;
+  safari = makeTest ./test-safari.nix;
 }

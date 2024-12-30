@@ -3,7 +3,7 @@
 let
   cfg = config.defaults.safari;
 
-  inherit (pkgs.callPackage ../lib { }) mkNullableOption;
+  inherit (pkgs.callPackage ../lib { }) mkNullableOption writeDefaults;
 in
 
 {
@@ -18,7 +18,7 @@ in
     };
   };
 
-  config.defaults._impl = {
+  config.defaults.out = writeDefaults {
     "com.apple.Safari.SandboxBroker" = {
       ShowDevelopMenu = cfg.devTools.enable;
     };

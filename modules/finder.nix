@@ -3,7 +3,7 @@
 let
   cfg = config.defaults.finder;
 
-  inherit (pkgs.callPackage ../lib { }) mkNullableOption;
+  inherit (pkgs.callPackage ../lib { }) mkNullableOption writeDefaults;
 in
 
 {
@@ -30,7 +30,7 @@ in
     };
   };
 
-  config.defaults._impl = {
+  config.defaults.out = writeDefaults {
     NSGlobalDomain = {
       AppleShowAllExtensions = cfg.showExtensions;
     };

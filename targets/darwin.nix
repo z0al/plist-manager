@@ -5,5 +5,8 @@
     ../modules
   ];
 
-  system.defaults.CustomUserPreferences = config.defaults._impl;
+  system.activationScripts.postActivation.text = ''
+    echo "Activating plist-manager"
+    ${config.defaults.out}
+  '';
 }
