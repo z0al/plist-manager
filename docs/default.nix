@@ -1,11 +1,27 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, lib ? pkgs.lib, ... }:
 
 let
+  githubLink = subpath:
+    let
+      user = "z0al";
+      repo = "plist-manager";
+    in
+    {
+      url = "https://github.com/${user}/${repo}/blob/main/${subpath}";
+      name = "<${subpath}>";
+    };
+
   makeOptionsDoc = configuration: filter: pkgs.nixosOptionsDoc {
     inherit (configuration) options;
 
     transformOptions = option: option // {
       visible = filter option;
+      declarations = map
+        (decl:
+          githubLink
+            (lib.removePrefix "/"
+              (lib.removePrefix (toString ./..) (toString decl))))
+        option.declarations;
     };
   };
 
@@ -32,12 +48,10 @@ pkgs.stdenvNoCC.mkDerivation {
   src = ./.;
 
   patchPhase = ''
-    # The "declared by" links point to a file which only exists when the docs
-    # are built locally. This removes the links.
-    sed '/*Declared by:*/,/^$/d' <${desktop.optionsCommonMark} >>src/options/desktop.md
-    sed '/*Declared by:*/,/^$/d' <${dock.optionsCommonMark} >>src/options/dock.md
-    sed '/*Declared by:*/,/^$/d' <${finder.optionsCommonMark} >>src/options/finder.md
-    sed '/*Declared by:*/,/^$/d' <${safari.optionsCommonMark} >>src/options/safari.md
+    cat ${desktop.optionsCommonMark} >>src/options/desktop.md
+    cat ${dock.optionsCommonMark} >>src/options/dock.md
+    cat ${finder.optionsCommonMark} >>src/options/finder.md
+    cat ${safari.optionsCommonMark} >>src/options/safari.md
   '';
 
   buildPhase = ''
