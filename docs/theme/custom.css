@@ -1,4 +1,4 @@
 .content h4 .header:link,
 .content h4 .header:visited {
-  color: var(--warning-border);
+  color: var(--links);
 }
