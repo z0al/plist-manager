@@ -1,4 +1,4 @@
-# Plist Manager
+# plist-manager
 
 <!-- MANUAL START -->
 
@@ -6,7 +6,7 @@
 
 ## Introduction
 
-Plist Manager (PM) is a Nix module for managing macOS user defaults. Unlike the built-in `defaults.*` modules offered by [nix-darwin] and [home-manager], PM provides the following advantages:
+Plist-manager (PM) is a Nix module for managing macOS user defaults. Unlike the built-in `defaults.*` modules offered by [nix-darwin](https://github.com/LnL7/nix-darwin) and [home-manager](https://github.com/nix-community/home-manager), PM provides the following advantages:
 
 - Human-friendly naming of domains and options, e.g., `trackpad.draggingStyle = "three-fingers"`.
 - Automatically reloads system settings with `activateSettings -u` after applying changes.
@@ -31,7 +31,7 @@ To get started, add `plist-manager` to your [Nix flake](https://nix.dev/concepts
 }
 ```
 
-Plist Manager provides Nix modules for both [nix-darwin] and [home-manager]. You should use either one, but NOT both, to avoid behavior conflicts.
+This module provides integrations for both [nix-darwin] and [home-manager]. You can use either one, but NOT both, to avoid behavior conflicts.
 
 ### For nix-darwin users
 
@@ -72,6 +72,3 @@ See installation instructions and available options at https://z0al.github.io/pl
 ## License
 
 This project is licensed under the terms of the [MIT license](./LICENSE).
-
-[nix-darwin]: https://github.com/LnL7/nix-darwin
-[home-manager]: https://github.com/nix-community/home-manager
