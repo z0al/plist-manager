@@ -33,9 +33,7 @@ let
   });
 
   optionsWithPrefix = prefix: (option:
-    builtins.elemAt option.loc 0 == "plist" &&
-    builtins.elemAt option.loc 1 == prefix
-  );
+    lib.hasPrefix "plist.${prefix}" option.name);
 
   # Keep this list sorted alphabetically
   headers = [
