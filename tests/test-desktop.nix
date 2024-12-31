@@ -13,11 +13,11 @@
   };
 
   test = ''
-    has "write 'com.apple.finder' 'CreateDesktop' -bool 1"
-    has "write 'com.apple.finder' 'ShowHardDrivesOnDesktop' -bool 1"
-    has "write 'com.apple.finder' 'ShowExternalHardDrivesOnDesktop' -bool 1"
-    has "write 'com.apple.finder' 'ShowRemovableMediaOnDesktop' -bool 1"
-    has "write 'com.apple.finder' '_FXSortFoldersFirstOnDesktop' -bool 1"
-    has "write 'com.apple.finder' 'ShowMountedServersOnDesktop' -bool 1"
+    has "write 'com.apple.finder' 'CreateDesktop' -bool true"
+    has "write 'com.apple.finder' 'ShowHardDrivesOnDesktop' -bool true"
+    has "write 'com.apple.finder' 'ShowExternalHardDrivesOnDesktop' -bool true"
+    has "write 'com.apple.finder' 'ShowRemovableMediaOnDesktop' -bool true"
+    has "write 'com.apple.finder' '_FXSortFoldersFirstOnDesktop' -bool true"
+    has "write 'com.apple.finder' 'ShowMountedServersOnDesktop' -bool true"
   '';
 }

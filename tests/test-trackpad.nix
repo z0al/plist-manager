@@ -12,13 +12,13 @@
 
   test = ''
     has "write -g 'com.apple.trackpad.scaling' -int 2"
-    has "write 'com.apple.AppleMultitouchTrackpad' 'Clicking' -bool 1"
-    has "write 'com.apple.driver.AppleBluetoothMultitouch.trackpad' 'Clicking' -bool 1"
-    has "write -g 'com.apple.swipescrolldirection' -bool 1"
+    has "write 'com.apple.AppleMultitouchTrackpad' 'Clicking' -bool true"
+    has "write 'com.apple.driver.AppleBluetoothMultitouch.trackpad' 'Clicking' -bool true"
+    has "write -g 'com.apple.swipescrolldirection' -bool true"
 
     # dragging style: double-tap
-    has "write 'com.apple.AppleMultitouchTrackpad' 'Dragging' -bool 1"
-    has "write 'com.apple.driver.AppleBluetoothMultitouch.trackpad' 'Dragging' -bool 1"
+    has "write 'com.apple.AppleMultitouchTrackpad' 'Dragging' -bool true"
+    has "write 'com.apple.driver.AppleBluetoothMultitouch.trackpad' 'Dragging' -bool true"
     has "delete 'com.apple.AppleMultitouchTrackpad' 'DragLock'"
     has "delete 'com.apple.driver.AppleBluetoothMultitouch.trackpad' 'DragLock'"
     has "delete 'com.apple.AppleMultitouchTrackpad' 'TrackpadThreeFingerDrag'"

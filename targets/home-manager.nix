@@ -2,7 +2,7 @@
 
 let
   script = pkgs.writeShellScript "plist-home-activate" config.plist.out;
-  fail = msg: "printf '\\033[0;31m${msg}\\033[0m\n' && exit 1";
+  fail = msg: "(printf '\\033[0;31m${msg}\\033[0m\n' && exit 1)";
 in
 
 {
@@ -11,6 +11,7 @@ in
   ];
 
   home.activation.plistManager = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    echo "└── Using ${script}"
     run ${script} || ${fail "Failed to run ${script}"}
   '';
 }

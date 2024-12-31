@@ -21,7 +21,8 @@ let
           quote = val:
             "'${lib.strings.escape [ "'" ] val}'";
         in
-        if lib.isBool value then "-bool ${toString value}"
+        if value == true then "-bool true"
+        else if value == false then "-bool false"
         else if lib.isInt value then "-int ${toString value}"
         else if lib.isFloat value then "-float ${toString value}"
         else if lib.isString value then "-string ${quote (toString value)}"

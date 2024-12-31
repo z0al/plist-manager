@@ -10,8 +10,8 @@
   };
 
   test = ''
-    has "write -g 'AppleShowAllExtensions' -bool 1"
-    has "write 'com.apple.finder' 'AppleShowAllFiles' -bool 1"
-    has "write 'com.apple.finder' '_FXSortFoldersFirst' -bool 1"
+    has "write -g 'AppleShowAllExtensions' -bool true"
+    has "write 'com.apple.finder' 'AppleShowAllFiles' -bool true"
+    has "write 'com.apple.finder' '_FXSortFoldersFirst' -bool true"
   '';
 }

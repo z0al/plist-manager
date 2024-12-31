@@ -2,7 +2,7 @@
 
 let
   script = pkgs.writeShellScript "plist-darwin-activate" config.plist.out;
-  fail = msg: "printf '\\033[0;31m${msg}\\033[0m\n' && exit 1";
+  fail = msg: "(printf '\\033[0;31m${msg}\\033[0m\n' && exit 1)";
 in
 
 {
@@ -12,7 +12,7 @@ in
 
   system.activationScripts.postActivation.text = ''
     echo "Activating plistManager"
-
+    echo "└── Using ${script}"
     ${script} || ${fail "Failed to run ${script}"}
   '';
 }
