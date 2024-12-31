@@ -31,7 +31,7 @@ To get started, add `plist-manager` to your [Nix flake](https://nix.dev/concepts
 }
 ```
 
-This module provides integrations for both [nix-darwin] and [home-manager]. You can use either one, but NOT both, to avoid behavior conflicts.
+This module provides integrations for both nix-darwin and home-manager. You can use either one, but NOT both, to avoid behavior conflicts.
 
 ### For nix-darwin users
 
