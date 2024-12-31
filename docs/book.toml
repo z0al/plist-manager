@@ -1,5 +1,5 @@
 [book]
-title = "plist-manager"
+title = "Plist-manager"
 description = "Nix-Based macOS User Defaults Done Right"
 language = "en"
 multilingual = false

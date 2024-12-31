@@ -1,3 +1,7 @@
+.menu-title {
+  text-transform: lowercase;
+}
+
 .content h4 .header:link,
 .content h4 .header:visited {
   color: var(--links);
