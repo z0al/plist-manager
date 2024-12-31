@@ -9,6 +9,7 @@
 Plist Manager (PM) is a Nix module for managing macOS user defaults. Unlike the built-in `defaults.*` modules offered by [nix-darwin] and [home-manager], PM provides the following advantages:
 
 - Human-friendly naming of domains and options, e.g., `trackpad.draggingStyle = "three-fingers"`.
+- Automatically reloads system settings with `activateSettings -u` after applying changes.
 - Unsetting an option or explicitly setting it to `null` _resets_ its value, effectively performing a `defaults delete <domain> <option>` command.
 
 The _null equals reset_ rule makes this module particularly useful, as it ensures that an option previously set is restored to the system default.

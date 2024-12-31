@@ -12,5 +12,8 @@
         (lib.filter
           (v: lib.trim v != "")
           (lib.splitString "\n" config.plist.out)))}
+
+    # Reload settings
+    /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
   '';
 }
