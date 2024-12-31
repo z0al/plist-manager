@@ -3,3 +3,6 @@ test:
 
 site:
 	@nix build .#docs && serve ./result
+
+watch:
+	@plistwatch

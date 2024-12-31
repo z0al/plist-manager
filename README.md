@@ -67,6 +67,38 @@ Add `plist-manager.homeManagerModules.default` to your home-manager modules:
 
 See available options at https://z0al.github.io/plist-manager
 
+## Development
+
+### Local Environment
+
+This repository provides a Nix shell to set up all the tools you need. You can integrate it with [direnv](https://github.com/nix-community/nix-direnv) by adding the following to your `.envrc`:
+
+```sh
+use_flake
+```
+
+### Running Unit Tests
+
+All test files must be placed under `./tests` and prefixed with `test-*`. Tests are automatically imported. See [tests/setup.nix](./tests/setup.nix) for more details.
+
+```sh
+make test
+```
+
+### Serving Documentation Locally
+
+```sh
+make site
+```
+
+### Inspecting Plist Domains and Keys
+
+This repository bundles [plistwatch](https://github.com/catilac/plistwatch), which is a handy tool for inspecting and identifying the associated plist domains and keys for various system settings.
+
+```sh
+make watch
+```
+
 ## License
 
 This project is licensed under the terms of the [MIT license](./LICENSE).

@@ -43,6 +43,7 @@
 
           devShells.default = pkgs.mkShell {
             nativeBuildInputs = with pkgs; [
+              plistwatch
               nodePackages.serve
             ];
           };
