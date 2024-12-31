@@ -84,6 +84,8 @@ pkgs.stdenvNoCC.mkDerivation {
         sed -e 's/##/####/g' <${section.file} >> src/index.md
       '')
       referenceSections)}
+
+    cat templates/footer.md >> src/index.md
   '';
 
   buildPhase = ''
