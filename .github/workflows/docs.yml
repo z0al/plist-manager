@@ -12,18 +12,11 @@ jobs:
     permissions:
       contents: read
 
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@main
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          extra-conf: |
-            extra-experimental-features = nix-command flakes
-
-      - name: Set up cache
-        uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v30
 
       - name: Build docs
         run: nix -L build github:${{ github.repository }}/${{ github.sha }}#docs
