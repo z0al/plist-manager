@@ -16,3 +16,5 @@ git-repository-url = "https://github.com/z0al/plist-manager"
 command = "mdbook-toc"
 max-level = 3
 renderer = ["html"]
+
+[preprocessor.alerts]

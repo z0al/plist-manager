@@ -14,9 +14,13 @@ Plist-manager (PM) is a Nix module for managing macOS user defaults. Unlike the 
 
 The _null equals reset_ rule makes this module particularly useful, as it ensures that any option previously set is restored to the system default. This behavior is crucial for configurations that are conditionally set, e.g., `NSGlobalDomain.AppleInterfaceStyle`, which is removed if the user opts for Light or Auto appearance mode.
 
-Since all options provided by this module default to `null`, by adding the module to a Nix flake you risk losing some user defaults that are not managed with Nix. This also makes the module incompatible with the built-in alternatives from nix-darwin and home-manager (unless used to set values that aren't touched by plist-manager; see the _"Affects"_ block next to each option in the [reference](https://z0al.github.io/plist-manager#reference) for more information).
-
-While this might sound intimidating, in practice, reverting to device defaults is usually fine and makes the final system state more predictable.
+> [!IMPORTANT]
+>
+> Since all options provided by this module default to `null`, by adding the module to a Nix flake you risk losing some user defaults that are not managed with Nix.
+>
+> This also makes the module incompatible with the built-in alternatives from nix-darwin and home-manager (unless used to set values that aren't touched by plist-manager; see the _"Affects: ..."_ block next to each option in the [reference](https://z0al.github.io/plist-manager#reference) for more information about which plist keys are affected).
+>
+> While this might sound intimidating, in practice, reverting to device defaults is usually fine and makes the final system state more predictable.
 
 ## Installation
 

@@ -63,6 +63,7 @@ pkgs.stdenvNoCC.mkDerivation {
   buildInputs = with pkgs; [
     mdbook
     mdbook-toc
+    mdbook-alerts
   ];
 
   patchPhase = ''
