@@ -72,15 +72,13 @@ pkgs.stdenvNoCC.mkDerivation {
     sed -n '/^<!-- MANUAL START -->/,/^<!-- MANUAL END -->/p' \
       ${../README.md} >> src/index.md
 
-    # Prefix table content with header
-    sed -i -e 's/<!-- toc -->/**Table Of Contents**\n<!-- toc -->/g' \
-      src/index.md
-
     # Add reference sections
-    printf "\n## Reference\n\n" >> src/index.md
+    cat templates/reference.md >> src/index.md
     ${lib.concatLines(
       map (section: ''
-        printf "\n### ${section.title}\n\n" >> src/index.md
+        sed -e 's/section/${section.title}/g' \
+          < templates/ref-section.md \
+          >> src/index.md
 
         # Force headers to be level 4
         sed -e 's/##/####/g' <${section.file} >> src/index.md
@@ -89,6 +87,6 @@ pkgs.stdenvNoCC.mkDerivation {
   '';
 
   buildPhase = ''
-    ${pkgs.mdbook}/bin/mdbook build --dest-dir $out
+    mdbook build --dest-dir $out
   '';
 }
