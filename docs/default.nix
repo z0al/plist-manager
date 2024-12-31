@@ -39,6 +39,7 @@ let
 
   # Keep this list sorted alphabetically
   headers = [
+    "Appearance"
     "Desktop"
     "Dock"
     "Finder"
