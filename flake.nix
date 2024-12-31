@@ -23,10 +23,8 @@
         "x86_64-darwin"
       ];
 
-      perSystem = { system, ... }:
+      perSystem = { pkgs, system, ... }:
         let
-          pkgs = nixpkgs.legacyPackages.${system};
-
           tests = import ./tests/setup.nix {
             inherit pkgs inputs system;
           };
@@ -41,6 +39,12 @@
 
           legacyPackages = {
             inherit docs;
+          };
+
+          devShells.default = pkgs.mkShell {
+            nativeBuildInputs = with pkgs; [
+              nodePackages.serve
+            ];
           };
         };
 

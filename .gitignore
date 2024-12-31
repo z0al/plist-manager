@@ -61,6 +61,10 @@ tags
 # Persistent undo
 [._]*.un~
 
+### direnv
+.direnv
+.envrc
+
 ### Custom
 result
 TODO.md
