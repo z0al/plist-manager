@@ -22,7 +22,7 @@ jobs:
         run: nix -L build github:${{ github.repository }}/${{ github.sha }}#docs
 
       - name: Prepare docs for upload
-        run: cp -r --dereference --no-preserve=mode,ownership result/ public/
+        run: cp -r -L result/ public/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
