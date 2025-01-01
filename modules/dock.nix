@@ -120,10 +120,10 @@ in
       # Auto hide
       autohide = cfg.autoHide.enable;
       autohide-delay =
-        if cfg.autoHide.enable then
+        if (cfg.autoHide.enable == true) then
           cfg.autoHide.delay else null;
       autohide-time-modifier =
-        if cfg.autoHide.enable then
+        if (cfg.autoHide.enable == true) then
           cfg.autoHide.animationDelay else null;
     };
   };
