@@ -14,7 +14,7 @@ in
         _Affects:_
         - "com.apple.finder"."CreateDesktop"
       '';
-      default = true;
+      default = null;
     };
 
     showHardDisks = lib.mkOption {
@@ -25,6 +25,7 @@ in
         _Affects:_
         - "com.apple.finder"."ShowHardDrivesOnDesktop"
       '';
+      default = null;
     };
 
     showExternalDisks = lib.mkOption {
@@ -35,6 +36,7 @@ in
         _Affects:_
         - "com.apple.finder"."ShowExternalHardDrivesOnDesktop"
       '';
+      default = null;
     };
 
     showRemovableMedia = lib.mkOption {
@@ -45,6 +47,7 @@ in
         _Affects:_
         - "com.apple.finder"."ShowRemovableMediaOnDesktop"
       '';
+      default = null;
     };
 
     showConnectedServers = lib.mkOption {
@@ -55,6 +58,7 @@ in
         _Affects:_
         - "com.apple.finder"."ShowMountedServersOnDesktop"
       '';
+      default = null;
     };
 
     keepFoldersOnTop = lib.mkOption {
@@ -65,6 +69,7 @@ in
         _Affects:_
         - "com.apple.finder"."_FXSortFoldersFirstOnDesktop"
       '';
+      default = null;
     };
   };
 
