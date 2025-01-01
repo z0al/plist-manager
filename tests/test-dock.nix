@@ -22,13 +22,14 @@
 
 
   test = ''
-    has "write 'com.apple.dock' 'orientation' -string 'left'"
-    has "write 'com.apple.dock' 'tilesize' -int 24"
-    has "write 'com.apple.dock' 'show-recents' -bool"
-    has "write 'com.apple.dock' 'autohide' -bool true"
-    has "write 'com.apple.dock' 'autohide-delay' -float 0.500000"
-    has "write 'com.apple.dock' 'autohide-time-modifier' -float 0.500000"
-    has "write 'com.apple.dock' 'mineffect' -string 'scale'"
-    has "write 'com.apple.dock' 'minimize-to-application' -bool"
+    Domain com.apple.dock
+    Set orientation '"left"'
+    Set tilesize 24
+    Set show-recents false
+    Set autohide true
+    Set autohide-delay 0.5
+    Set autohide-time-modifier 0.5
+    Set mineffect '"scale"'
+    Set minimize-to-application false
   '';
 }

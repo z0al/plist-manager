@@ -1,19 +1,18 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, ... }:
 
 let
   cfg = config.plist.appearance;
-
-  inherit (pkgs.callPackage ../lib { }) mkNullableOption mkCond writePlist;
 in
 
 {
   options.plist.appearance = with lib; {
-    theme = mkNullableOption {
-      type = types.enum [
-        "auto"
-        "light"
-        "dark"
-      ];
+    theme = mkOption {
+      type = types.nullOr (
+        types.enum [
+          "auto"
+          "light"
+          "dark"
+        ]);
       description = ''
         Choose the appearance for buttons, menus and windows.
 
@@ -25,28 +24,32 @@ in
         - "NSGlobalDomain"."AppleInterfaceStyle"
         - "NSGlobalDomain"."AppleInterfaceStyleSwitchesAutomatically"
       '';
+      default = null;
     };
 
-    showScrollBar = mkNullableOption {
-      type = types.enum [
-        "auto"
-        "always"
-        "when-scrolling"
-      ];
+    showScrollBar = mkOption {
+      type = types.nullOr (
+        types.enum [
+          "auto"
+          "always"
+          "when-scrolling"
+        ]);
       description = ''
         Control when the scroll bar is shown
 
         _Affects:_
         - "NSGlobalDomain"."AppleShowScrollBars"
       '';
+      default = null;
     };
   };
 
-  config.plist.out = writePlist {
+  config.plist.out = {
     NSGlobalDomain = {
-      AppleInterfaceStyle = mkCond (cfg.theme == "dark") "Dark";
+      AppleInterfaceStyle =
+        if (cfg.theme == "dark") then "Dark" else null;
       AppleInterfaceStyleSwitchesAutomatically =
-        mkCond (cfg.theme == "auto") true;
+        if (cfg.theme == "auto") then true else null;
 
       AppleShowScrollBars =
         if cfg.showScrollBar == "auto" then "Automatic"

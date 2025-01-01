@@ -1,45 +1,46 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, ... }:
 
 let
   cfg = config.plist.finder;
-
-  inherit (pkgs.callPackage ../lib { }) mkNullableOption writePlist;
 in
 
 {
   options.plist.finder = with lib; {
-    showHidden = mkNullableOption {
-      type = types.bool;
+    showHidden = mkOption {
+      type = types.nullOr types.bool;
       description = ''
         Whether to show hidden files in Finder
 
         _Affects:_
         - "com.apple.finder"."AppleShowAllFiles"
       '';
+      default = null;
     };
 
-    showExtensions = mkNullableOption {
-      type = types.bool;
+    showExtensions = mkOption {
+      type = types.nullOr types.bool;
       description = ''
         Whether to show file extensions in the Finder
 
         _Affects:_
         - "NSGlobalDomain"."AppleShowAllExtensions"
       '';
+      default = null;
     };
 
-    keepFoldersOnTop = mkNullableOption {
-      type = types.bool;
+    keepFoldersOnTop = mkOption {
+      type = types.nullOr types.bool;
       description = ''
         Whether to keep folders on top when sorting
 
         _Affects:_
         - "com.apple.finder"."_FXSortFoldersFirst"
       '';
+      default = null;
     };
   };
 
-  config.plist.out = writePlist {
+  config.plist.out = {
     NSGlobalDomain = {
       AppleShowAllExtensions = cfg.showExtensions;
     };

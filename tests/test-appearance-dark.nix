@@ -8,7 +8,8 @@
   };
 
   test = ''
-    has "write -g 'AppleInterfaceStyle' -string 'Dark'"
-    has "delete -g 'AppleInterfaceStyleSwitchesAutomatically'"
+    Domain NSGlobalDomain
+    Set AppleInterfaceStyle '"Dark"'
+    Del AppleInterfaceStyleSwitchesAutomatically
   '';
 }

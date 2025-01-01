@@ -1,107 +1,115 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, ... }:
 
 let
   cfg = config.plist.dock;
-
-  inherit (pkgs.callPackage ../lib { }) mkCond mkNullableOption writePlist;
 in
 
 {
   options.plist.dock = with lib; {
-    position = mkNullableOption {
-      type = types.enum [
-        "bottom"
-        "left"
-        "right"
-      ];
+    position = mkOption {
+      type = types.nullOr (
+        types.enum [
+          "bottom"
+          "left"
+          "right"
+        ]);
       description = ''
         Position of the dock on screen
 
         _Affects:_
         - "com.apple.dock"."orientation"
       '';
+      default = null;
     };
 
-    size = mkNullableOption {
-      type = types.int;
+    size = mkOption {
+      type = types.nullOr types.int;
       description = ''
         Size of the dock icons
 
         _Affects:_
         - "com.apple.dock"."tilesize"
       '';
+      default = null;
     };
 
-    showRecentApps = mkNullableOption {
-      type = types.bool;
+    showRecentApps = mkOption {
+      type = types.nullOr types.bool;
       description = ''
         Whether to show recent applications in the Dock
 
         _Affects:_
         - "com.apple.dock"."show-recents"
       '';
+      default = null;
     };
 
     autoHide = {
-      enable = mkNullableOption {
-        type = types.bool;
+      enable = mkOption {
+        type = types.nullOr types.bool;
         description = ''
           Whether to automatically hide and show the dock
 
           _Affects:_
           - "com.apple.dock"."autohide"
         '';
+        default = null;
       };
 
-      delay = mkNullableOption {
-        type = types.float;
+      delay = mkOption {
+        type = types.nullOr types.float;
         description = ''
           Sets the speed of the auto-hide delay
 
           _Affects:_
           - "com.apple.dock"."autohide-delay"
         '';
+        default = null;
       };
 
-      animationDelay = mkNullableOption {
-        type = types.float;
+      animationDelay = mkOption {
+        type = types.nullOr types.float;
         description = ''
           Sets the speed of the animation when hiding/showing the Dock
 
           _Affects:_
           - "com.apple.dock"."autohide-time-modifier"
         '';
+        default = null;
       };
     };
 
     minimize = {
-      effect = mkNullableOption {
-        type = types.enum [
-          "genie"
-          "scale"
-          "suck"
-        ];
+      effect = mkOption {
+        type = types.nullOr (
+          types.enum [
+            "genie"
+            "scale"
+            "suck"
+          ]);
         description = ''
           Sets the effect of minimizing windows
 
           _Affects:_
           - "com.apple.dock"."mineffect"
         '';
+        default = null;
       };
 
-      toApplicationIcon = mkNullableOption {
-        type = types.bool;
+      toApplicationIcon = mkOption {
+        type = types.nullOr types.bool;
         description = ''
           Whether to minimize windows to the application icon
 
           _Affects:_
           - "com.apple.dock"."minimize-to-application"
         '';
+        default = null;
       };
     };
   };
 
-  config.plist.out = writePlist {
+  config.plist.out = {
     "com.apple.dock" = {
       orientation = cfg.position;
       tilesize = cfg.size;
@@ -111,10 +119,12 @@ in
 
       # Auto hide
       autohide = cfg.autoHide.enable;
-      autohide-delay = mkCond cfg.autoHide.enable cfg.autoHide.delay;
-      autohide-time-modifier = mkCond
-        cfg.autoHide.enable
-        cfg.autoHide.animationDelay;
+      autohide-delay =
+        if cfg.autoHide.enable then
+          cfg.autoHide.delay else null;
+      autohide-time-modifier =
+        if cfg.autoHide.enable then
+          cfg.autoHide.animationDelay else null;
     };
   };
 }

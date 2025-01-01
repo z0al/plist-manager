@@ -1,32 +1,33 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, ... }:
 
 let
   cfg = config.plist.trackpad;
 
-  inherit (pkgs.callPackage ../lib { }) mkNullableOption writePlist mkCond;
-
   multiTouchOptions = {
     Clicking = cfg.tapToClick;
 
-    Dragging = mkCond
-      (cfg.draggingStyle != null &&
-        cfg.draggingStyle != "three-fingers")
-      true;
+    Dragging =
+      if (cfg.draggingStyle != null &&
+        cfg.draggingStyle != "three-fingers") then
+        true
+      else null;
 
-    DragLock = mkCond
-      (cfg.draggingStyle == "double-tap-lock")
-      true;
+    DragLock =
+      if (cfg.draggingStyle == "double-tap-lock") then
+        true
+      else null;
 
-    TrackpadThreeFingerDrag = mkCond
-      (cfg.draggingStyle == "three-fingers")
-      true;
+    TrackpadThreeFingerDrag =
+      if (cfg.draggingStyle == "three-fingers") then
+        true
+      else null;
   };
 in
 
 {
   options.plist.trackpad = with lib; {
-    tapToClick = mkNullableOption {
-      type = types.bool;
+    tapToClick = mkOption {
+      type = types.nullOr types.bool;
       description = ''
         Whether to enable tap to click
 
@@ -34,24 +35,27 @@ in
         - "com.apple.AppleMultitouchTrackpad"."Clicking"
         - "com.apple.driver.AppleBluetoothMultitouch.trackpad"."Clicking"
       '';
+      default = null;
     };
 
-    naturalScrolling = mkNullableOption {
-      type = types.bool;
+    naturalScrolling = mkOption {
+      type = types.nullOr types.bool;
       description = ''
         Whether to move the contents of a window in the same direction as your fingers
 
         _Affects:_
         - "NSGlobalDomain"."com.apple.swipescrolldirection"
       '';
+      default = null;
     };
 
-    draggingStyle = mkNullableOption {
-      type = types.enum [
-        "double-tap"
-        "double-tap-lock"
-        "three-fingers"
-      ];
+    draggingStyle = mkOption {
+      type = types.nullOr (
+        types.enum [
+          "double-tap"
+          "double-tap-lock"
+          "three-fingers"
+        ]);
 
       description = ''
         Adjust the trackpad dragging style:
@@ -68,20 +72,24 @@ in
         - "com.apple.driver.AppleBluetoothMultitouch.trackpad"."Dragging"
         - "com.apple.driver.AppleBluetoothMultitouch.trackpad"."TrackpadThreeFingerDrag"
       '';
+      default = null;
     };
 
-    speed = mkNullableOption {
-      type = types.numbers.between 0 3;
+    speed = mkOption {
+      type = types.nullOr (
+        types.numbers.between 0 3
+      );
       description = ''
         Adjust the trackpad tracking speed
 
         _Affects:_
         - "NSGlobalDomain"."com.apple.trackpad.scaling"
       '';
+      default = null;
     };
   };
 
-  config.plist.out = writePlist {
+  config.plist.out = {
     NSGlobalDomain = {
       "com.apple.trackpad.scaling" = cfg.speed;
       "com.apple.swipescrolldirection" = cfg.naturalScrolling;

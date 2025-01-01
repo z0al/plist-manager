@@ -11,17 +11,20 @@
   };
 
   test = ''
-    has "write -g 'com.apple.trackpad.scaling' -int 2"
-    has "write 'com.apple.AppleMultitouchTrackpad' 'Clicking' -bool true"
-    has "write 'com.apple.driver.AppleBluetoothMultitouch.trackpad' 'Clicking' -bool true"
-    has "write -g 'com.apple.swipescrolldirection' -bool true"
+    Domain NSGlobalDomain
+    Set com.apple.trackpad.scaling 2
+    Set com.apple.swipescrolldirection true
 
-    # dragging style: double-tap
-    has "write 'com.apple.AppleMultitouchTrackpad' 'Dragging' -bool true"
-    has "write 'com.apple.driver.AppleBluetoothMultitouch.trackpad' 'Dragging' -bool true"
-    has "delete 'com.apple.AppleMultitouchTrackpad' 'DragLock'"
-    has "delete 'com.apple.driver.AppleBluetoothMultitouch.trackpad' 'DragLock'"
-    has "delete 'com.apple.AppleMultitouchTrackpad' 'TrackpadThreeFingerDrag'"
-    has "delete 'com.apple.driver.AppleBluetoothMultitouch.trackpad' 'TrackpadThreeFingerDrag'"
+    Domain com.apple.AppleMultitouchTrackpad
+    Set Clicking true
+    Set Dragging true
+    Del DragLock
+    Del TrackpadThreeFingerDrag
+
+    Domain com.apple.driver.AppleBluetoothMultitouch.trackpad
+    Set Clicking true
+    Set Dragging true
+    Del DragLock
+    Del TrackpadThreeFingerDrag
   '';
 }

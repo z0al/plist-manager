@@ -9,9 +9,16 @@
   plist.safari.devTools.enable = null;
 
   test = ''
-    has "defaults delete 'com.apple.finder' 'CreateDesktop'"
-    has "defaults delete 'com.apple.dock' 'orientation'"
-    has "defaults delete -g 'AppleShowAllExtensions'"
-    has "defaults delete 'com.apple.Safari.SandboxBroker' 'ShowDevelopMenu'"
+    Domain NSGlobalDomain
+    Del AppleShowAllExtensions
+
+    Domain com.apple.finder
+    Del CreateDesktop
+
+    Domain com.apple.dock
+    Del orientation
+
+    Domain com.apple.Safari.SandboxBroker
+    Del ShowDevelopMenu
   '';
 }
