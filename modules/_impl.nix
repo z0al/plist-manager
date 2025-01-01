@@ -6,10 +6,12 @@ let
       # We can only serialize values that are not null to *.plist files
       # The rest will be mapped to deletion commands
       writable = conf:
-        mapAttrs
-          (domain: attrs:
-            (filterAttrs (n: v: v != null) attrs))
-          conf;
+        filterAttrs
+          (domain: attrs: attrs != { })
+          (mapAttrs
+            (domain: attrs:
+              (filterAttrs (n: v: v != null) attrs))
+            conf);
 
       deletable = conf:
         mapAttrs
