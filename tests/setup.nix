@@ -61,8 +61,8 @@ let
                   echo ""
                   echo "Domain start: '$d'"
 
-                  f=$(rg -PNo "import '$d' (/nix/.*plist)" $out -r '$1')
-                  echo "Imports -> ${"\${f:-None}"}"
+                  f=$(rg -PNo "'$d' (/nix/.*plist)" $out -r '$1' || echo None)
+                  echo "Imports -> $f"
                 }
 
                 function Set {
