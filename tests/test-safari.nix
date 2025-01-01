@@ -8,6 +8,7 @@
   };
 
   test = ''
-    has "write 'com.apple.Safari.SandboxBroker' 'ShowDevelopMenu' -bool true"
+    Domain com.apple.Safari.SandboxBroker
+    Set ShowDevelopMenu true
   '';
 }

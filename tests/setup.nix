@@ -22,7 +22,7 @@ let
         { config, pkgs, lib, ... }:
         {
           imports = [
-            ../modules/impl
+            ../modules/_impl.nix
             test
           ];
 
@@ -34,17 +34,69 @@ let
             system.stateVersion = config.system.maxStateVersion;
 
             system.build.run-test = pkgs.runCommandLocal name
-              { }
+              {
+                nativeBuildInputs = with pkgs; [
+                  jq
+                  jc
+                  ripgrep
+                ];
+              }
               ''
                 set -e
                 echo ${lib.escapeShellArg config.plist.out} > $out
 
-                function has {
-                  if ! grep -q "$1" $out; then
+                # Holds domain context
+                d=""
+
+                # Holds path to the plist file for the domain (if any)
+                f=""
+
+                function Domain {
+                  if [[ -n "$d" ]]; then
+                    echo "Domain end"
+                  fi
+
+                  d=$1
+
+                  echo ""
+                  echo "Domain start: '$d'"
+
+                  f=$(rg -PNo "import '$d' (/nix/.*plist)" $out -r '$1')
+                  echo "Imports -> ${"\${f:-None}"}"
+                }
+
+                function Set {
+                  if ! test -e "$f"; then
                     echo ""
-                    echo "Expected output to contain:"
+                    echo "Assertion failed for '$1'. No imports to domain '$d'"
                     echo ""
-                    echo "    $1"
+                    exit 1
+                  fi
+
+                  v=$(cat $f | jc --plist | jq ".\"$1\"")
+
+                  if [[ "$v" != "$2" ]]; then
+                    echo ""
+                    echo "Expected attribute '$d'.'$1' to equal:"
+                    echo ""
+                    echo "    $2"
+                    echo ""
+                    echo "But value is:"
+                    echo ""
+                    echo "    $v"
+                    echo ""
+                    echo "Full output:"
+                    echo ""
+                    cat $out | sed 's/^/    /'
+                    echo ""
+                    exit 1
+                  fi
+                }
+
+                function Del {
+                  if ! grep -q "defaults delete '$d' '$1'" $out; then
+                    echo ""
+                    echo "Expected attribute '$d'.'$1' to be deleted."
                     echo ""
                     echo "Actual output:"
                     echo ""

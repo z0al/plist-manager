@@ -9,8 +9,9 @@
   };
 
   test = ''
-    has "delete -g 'AppleInterfaceStyle'"
-    has "write -g 'AppleInterfaceStyleSwitchesAutomatically' -bool true"
-    has "write -g 'AppleShowScrollBars' -string 'WhenScrolling'"
+    Domain NSGlobalDomain
+    Set AppleInterfaceStyleSwitchesAutomatically true
+    Set AppleShowScrollBars '"WhenScrolling"'
+    Del AppleInterfaceStyle
   '';
 }

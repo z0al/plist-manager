@@ -1,6 +1,6 @@
 {
   imports = [
-    ./impl
+    ./_impl.nix
 
     ./appearance.nix
     ./desktop.nix

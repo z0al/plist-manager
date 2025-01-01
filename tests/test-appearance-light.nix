@@ -8,7 +8,8 @@
   };
 
   test = ''
-    has "delete -g 'AppleInterfaceStyle'"
-    has "delete -g 'AppleInterfaceStyleSwitchesAutomatically'"
+    Domain NSGlobalDomain
+    Del AppleInterfaceStyle
+    Del AppleInterfaceStyleSwitchesAutomatically
   '';
 }

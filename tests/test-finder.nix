@@ -10,8 +10,11 @@
   };
 
   test = ''
-    has "write -g 'AppleShowAllExtensions' -bool true"
-    has "write 'com.apple.finder' 'AppleShowAllFiles' -bool true"
-    has "write 'com.apple.finder' '_FXSortFoldersFirst' -bool true"
+    Domain NSGlobalDomain
+    Set AppleShowAllExtensions true
+
+    Domain com.apple.finder
+    Set AppleShowAllFiles true
+    Set _FXSortFoldersFirst true
   '';
 }

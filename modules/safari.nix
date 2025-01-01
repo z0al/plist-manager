@@ -1,27 +1,26 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, ... }:
 
 let
   cfg = config.plist.safari;
-
-  inherit (pkgs.callPackage ../lib { }) mkNullableOption writePlist;
 in
 
 {
   options.plist.safari = with lib; {
     devTools = {
-      enable = mkNullableOption {
-        type = types.bool;
+      enable = mkOption {
+        type = types.nullOr types.bool;
         description = ''
           Whether to enable the developer tools in Safari
 
           _Affects:_
           - "com.apple.Safari.SandboxBroker"."ShowDevelopMenu"
         '';
+        default = null;
       };
     };
   };
 
-  config.plist.out = writePlist {
+  config.plist.out = {
     "com.apple.Safari.SandboxBroker" = {
       ShowDevelopMenu = cfg.devTools.enable;
     };

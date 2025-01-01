@@ -8,11 +8,14 @@
   };
 
   test = ''
-    has "write 'com.apple.AppleMultitouchTrackpad' 'Dragging' -bool true"
-    has "write 'com.apple.driver.AppleBluetoothMultitouch.trackpad' 'Dragging' -bool true"
-    has "write 'com.apple.AppleMultitouchTrackpad' 'DragLock' -bool true"
-    has "write 'com.apple.driver.AppleBluetoothMultitouch.trackpad' 'DragLock' -bool true"
-    has "delete 'com.apple.AppleMultitouchTrackpad' 'TrackpadThreeFingerDrag'"
-    has "delete 'com.apple.driver.AppleBluetoothMultitouch.trackpad' 'TrackpadThreeFingerDrag'"
+    Domain com.apple.AppleMultitouchTrackpad
+    Set Dragging true
+    Set DragLock true
+    Del TrackpadThreeFingerDrag
+
+    Domain com.apple.driver.AppleBluetoothMultitouch.trackpad
+    Set Dragging true
+    Set DragLock true
+    Del TrackpadThreeFingerDrag
   '';
 }
