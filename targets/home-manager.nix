@@ -10,7 +10,7 @@ in
     ../modules
   ];
 
-  home.activation.plistManager = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  home.activation.plistManager = lib.hm.dag.entryAfter [ "setDarwinDefaults" ] ''
     echo "└── Using ${script}"
     run ${script} || ${fail "Failed to run ${script}"}
   '';
