@@ -39,7 +39,7 @@ let
                 (key: _value: ''
                   /usr/bin/defaults delete '${
                     escapeShellArg domain
-                  }' '${escapeShellArg key}'
+                  }' '${escapeShellArg key}' &> /dev/null || true
                 '')
                 attrs)
             conf);
