@@ -1,11 +1,12 @@
-{ pkgs
+{ self
+, pkgs
 , inputs
 , system
 }:
 
-let
-  lib = pkgs.lib;
+with pkgs.lib;
 
+let
   buildFromConfig = configuration: sel: sel
     (import inputs.nix-darwin {
       inherit (inputs) nixpkgs;
@@ -19,15 +20,23 @@ let
   makeTest = name: test:
     let
       configuration =
-        { config, pkgs, lib, ... }:
+        { config, pkgs, ... }:
+
+        let
+          defaults = builtins.toJSON
+            config.system.defaults.CustomUserPreferences;
+
+          purgeScript = config.plist.purgeScript;
+        in
+
         {
           imports = [
-            ../modules/_impl.nix
+            self.darwinModules.default
             test
           ];
 
-          options.test = lib.mkOption {
-            type = lib.types.lines;
+          options.test = mkOption {
+            type = types.lines;
           };
 
           config = {
@@ -37,19 +46,16 @@ let
               {
                 nativeBuildInputs = with pkgs; [
                   jq
-                  jc
-                  ripgrep
                 ];
               }
               ''
                 set -e
-                echo ${lib.escapeShellArg config.plist.out} > $out
+                mkdir -p $out
+                echo ${escapeShellArg defaults} > $out/defaults.json
+                echo ${escapeShellArg purgeScript} > $out/purge.sh
 
                 # Holds domain context
                 d=""
-
-                # Holds path to the plist file for the domain (if any)
-                f=""
 
                 function Domain {
                   if [[ -n "$d" ]]; then
@@ -60,20 +66,10 @@ let
 
                   echo ""
                   echo "Domain start: '$d'"
-
-                  f=$(rg -PNo "'$d' (/nix/.*plist)" $out -r '$1' || echo None)
-                  echo "Imports -> $f"
                 }
 
                 function Set {
-                  if ! test -e "$f"; then
-                    echo ""
-                    echo "Assertion failed for '$1'. No imports to domain '$d'"
-                    echo ""
-                    exit 1
-                  fi
-
-                  v=$(cat $f | jc --plist | jq ".\"$1\"")
+                  v=$(cat $out/defaults.json | jq ".\"$d\".\"$1\"")
 
                   if [[ "$v" != "$2" ]]; then
                     echo ""
@@ -87,20 +83,20 @@ let
                     echo ""
                     echo "Full output:"
                     echo ""
-                    cat $out | sed 's/^/    /'
+                    jq . $out/defaults.json | sed 's/^/    /'
                     echo ""
                     exit 1
                   fi
                 }
 
                 function Del {
-                  if ! grep -q "defaults delete '$d' '$1'" $out; then
+                  if ! grep -q "defaults delete '$d' '$1'" $out/purge.sh; then
                     echo ""
                     echo "Expected attribute '$d'.'$1' to be deleted."
                     echo ""
                     echo "Actual output:"
                     echo ""
-                    cat $out | sed 's/^/    /'
+                    cat $out/purge.sh | sed 's/^/    /'
                     echo ""
                     exit 1
                   fi
@@ -115,10 +111,10 @@ let
     buildFromConfig configuration (config: config.system.build.run-test);
 in
 
-lib.listToAttrs (map
+listToAttrs (map
   (file: rec {
     name = testName file;
     value = makeTest name file;
   })
-  (lib.fileset.toList
-    (lib.fileset.fileFilter (file: lib.hasPrefix "test-" file.name) ./.)))
+  (fileset.toList
+    (fileset.fileFilter (file: hasPrefix "test-" file.name) ./.)))

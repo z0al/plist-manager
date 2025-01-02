@@ -1,58 +1,28 @@
-{ pkgs, lib, ... }:
+{ config, lib, ... }:
 
 let
-  writePlist = configuration: with lib;
+  purgePlist = defaults:
     let
-      # We can only serialize values that are not null to *.plist files
-      # The rest will be mapped to deletion commands
-      writable = conf:
-        filterAttrs
-          (domain: attrs: attrs != { })
-          (mapAttrs
-            (domain: attrs:
-              (filterAttrs (n: v: v != null) attrs))
-            conf);
-
       deletable = conf:
-        mapAttrs
+        lib.mapAttrs
           (domain: attrs:
-            (filterAttrs (n: v: v == null) attrs))
-          conf;
-
-      toPlist = domain: attrs:
-        pkgs.writeText "${domain}.plist" (generators.toPlist { } attrs);
-
-      importAttrs = conf:
-        mapAttrsToList
-          (domain: attrs: ''
-            /usr/bin/defaults import '${
-              escapeShellArg domain
-            }' ${toPlist domain attrs}
-          '')
+            (lib.filterAttrs (n: v: v == null) attrs))
           conf;
 
       deleteAttrs = conf:
-        flatten (
-          mapAttrsToList
+        lib.flatten (
+          lib.mapAttrsToList
             (domain: attrs:
-              mapAttrsToList
+              lib.mapAttrsToList
                 (key: _value: ''
                   /usr/bin/defaults delete '${
-                    escapeShellArg domain
-                  }' '${escapeShellArg key}' &> /dev/null || true
+                    lib.escapeShellArg domain
+                  }' '${lib.escapeShellArg key}' &> /dev/null || true
                 '')
                 attrs)
             conf);
     in
-    concatLines (
-      (importAttrs (writable configuration)) ++
-      (deleteAttrs (deletable configuration))
-    );
-
-  reload = ''
-    # Reload settings
-    /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-  '';
+    lib.concatLines (deleteAttrs (deletable defaults));
 in
 
 {
@@ -67,15 +37,29 @@ in
             str
           ]))
         );
+      description = ''
+        Holds all user defaults assignment made by plist-manager. Its value gets
+        assigned to either nix-darwin's `system.defaults.*` or home-manager's
+        `targets.darwin.default.*`.
+      '';
       default = { };
       internal = true;
       visible = false;
-      apply = value: ''
-        set -e
-
-        ${writePlist value}
-        ${reload}
-      '';
     };
+
+    purgeScript = mkOption {
+      type = types.lines;
+      description = ''
+        A script to purge all the unset user defaults. This won't be taken care
+        of by default by either nix-darwin or home-manager
+      '';
+      default = "";
+      internal = true;
+      visible = false;
+    };
+  };
+
+  config = {
+    plist.purgeScript = purgePlist config.plist.out;
   };
 }
