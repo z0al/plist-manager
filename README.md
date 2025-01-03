@@ -20,9 +20,7 @@ The _null equals reset_ rule makes this module particularly useful, as it ensure
 >
 > This also makes the module incompatible with the built-in alternatives from nix-darwin and home-manager (unless used to set values that aren't touched by plist-manager; see the _"Affects: ..."_ block next to each option in the [reference](https://z0al.github.io/plist-manager#reference) for more information about which plist keys are affected).
 >
-> While this might sound intimidating, in practice, I find reverting to device defaults is usually fine and makes the final system state more predictable.
->
-> I'm treating this behavior as an experiment for now and may explore different approaches in the future.
+> In the near future, I plan to keep track of unset values properly and only delete those instead of every attribute.
 
 ## Installation
 
